@@ -28,7 +28,7 @@ public class Test360 extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderTurn(39.6, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(50, 1.0, true, leftMotor, rightMotor, opModeIsActive());
     }
 
 

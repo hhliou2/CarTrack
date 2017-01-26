@@ -28,7 +28,7 @@ public class Test180 extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderTurn(19.8, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(20.42, 1.0, true, leftMotor, rightMotor, opModeIsActive());
     }
 
 }
