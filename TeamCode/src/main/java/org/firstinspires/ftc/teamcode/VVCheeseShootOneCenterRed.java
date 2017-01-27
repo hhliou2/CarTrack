@@ -62,9 +62,9 @@ public class VVCheeseShootOneCenterRed extends LinearOpMode {
         sleep(8000);
         encoderForward(14.4, 0.5, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderTurn(5, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(6.25, 1.0, false, leftMotor, rightMotor, opModeIsActive());
         encoderForward(30, 0.5, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(10, 0.5, true, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(12.5, 0.5, true, leftMotor, rightMotor, opModeIsActive());
         encoderForward(84, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 
