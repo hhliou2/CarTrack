@@ -60,9 +60,9 @@ public class VVCheeseShootTwoCornerBlue extends LinearOpMode {
         waitForStart();
 
         sleep(8000);
-        encoderForward(38, 0.5, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(49, 0.5, leftMotor, rightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderTurn(5, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(6.25, 1.0, false, leftMotor, rightMotor, opModeIsActive());
         encoderForward(72, 0.5, leftMotor, rightMotor, opModeIsActive());
     }
 
