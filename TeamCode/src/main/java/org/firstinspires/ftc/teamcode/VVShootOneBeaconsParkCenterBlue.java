@@ -66,7 +66,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         encoderTurn(17.396, 1.0, true, leftMotor, rightMotor, opModeIsActive());
         encoderForward(-56.301, -1.0, leftMotor, rightMotor, opModeIsActive());
         encoderTurn(19.388, 1.0, false, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.15, 0.25, true, leftMotor, rightMotor, eopd, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
