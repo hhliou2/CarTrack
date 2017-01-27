@@ -64,23 +64,23 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
 
         encoderForward(14.4, 0.5, leftMotor, rightMotor,opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderTurn(5, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(6.25, 1.0, false, leftMotor, rightMotor, opModeIsActive());
         lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
         lineFollow(0.25, 0.5, true, leftMotor, rightMotor, touch, eopd, opModeIsActive());
         beaconCheck(true, color, buttonPresser);
         sleep(1000);
         buttonPresser.setPosition(0.5);
         encoderForward(-48, -1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(10, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(12.5, 1.0, true, leftMotor, rightMotor, opModeIsActive());
         lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
         lineFollow(0.25, 0.5, true, leftMotor, rightMotor, touch, eopd, opModeIsActive());
         beaconCheck(true, color, buttonPresser);
         sleep(1000);
         buttonPresser.setPosition(0.5);
         encoderForward(-18, -1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(10, 1, false, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(12.5, 1, false, leftMotor, rightMotor, opModeIsActive());
         encoderForward(144, 1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(5, 1, true, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(6.25, 1, true, leftMotor, rightMotor, opModeIsActive());
         encoderForward(12, 1, leftMotor, rightMotor, opModeIsActive());
     }
 

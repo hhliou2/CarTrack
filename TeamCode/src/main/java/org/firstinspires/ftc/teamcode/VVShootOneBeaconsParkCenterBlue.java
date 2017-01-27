@@ -8,11 +8,11 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheck;
+import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
-import static org.firstinspires.ftc.teamcode.MethodSlave.lineFollow;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -38,7 +38,6 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
     TouchSensor touch;
 
-
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
@@ -58,30 +57,32 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(0.5);
+        buttonPresser.setPosition(0);
         //waits for user to press start
         waitForStart();
 
-        encoderForward(14.4, 0.5, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(14, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderTurn(5, 1.0, true, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
-        lineFollow(0.25, 0.5, true, leftMotor, rightMotor, touch, eopd, opModeIsActive());
-        beaconCheck(true, color, buttonPresser);
-        sleep(1000);
-        buttonPresser.setPosition(0.5);
-        encoderForward(-48, -1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(5.5, 1.0, false, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
-        lineFollow(0.25, 0.5, true, leftMotor, rightMotor, touch, eopd, opModeIsActive());
-        beaconCheck(true, color, buttonPresser);
-        sleep(1000);
-        buttonPresser.setPosition(0.5);
-        encoderForward(-18, -1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(10, 1, true, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(144, 1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(5, 1, false, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(12, 1, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(17.396, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-56.301, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(19.388, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.15, 0.25, true, leftMotor, rightMotor, eopd, opModeIsActive());
+
+        do {
+            beaconCheckOut(buttonPresser);
+            sleep(700);
+            beaconCheckIn(buttonPresser);
+            sleep(700);
+        } while (color.blue() < color.red() && opModeIsActive());
+
+        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+
+        do {
+            beaconCheckOut(buttonPresser);
+            sleep(700);
+            beaconCheckIn(buttonPresser);
+            sleep(700);
+        } while (color.blue() < color.red() && opModeIsActive());
     }
 
 
