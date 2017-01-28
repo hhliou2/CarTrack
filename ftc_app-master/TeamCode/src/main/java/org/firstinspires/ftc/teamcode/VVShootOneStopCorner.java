@@ -9,16 +9,15 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
-import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
+import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
- * Created by Hasan on 12/1/2016.
+ * Created by Fluff on 1/28/2017.
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Center Shoot Two Park Blue", group="Park Corner")
-public class VVShootTwoParkCenterBlue extends LinearOpMode {
+@Autonomous(name="Corner Shoot One Stop", group="Stop")
+public class VVShootOneStopCorner extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -28,13 +27,6 @@ public class VVShootTwoParkCenterBlue extends LinearOpMode {
 
     Servo buttonPresser;
     Servo floodgate;
-
-    ColorSensor color;
-
-    OpticalDistanceSensor eopd;
-
-    TouchSensor touch;
-
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -47,24 +39,14 @@ public class VVShootTwoParkCenterBlue extends LinearOpMode {
         buttonPresser = hardwareMap.servo.get("button");
         floodgate = hardwareMap.servo.get("floodGate");
 
-        color = hardwareMap.colorSensor.get("color");
-
-        eopd = hardwareMap.opticalDistanceSensor.get("eopd");
-
-        touch = hardwareMap.touchSensor.get("touch");
-
         //close the floodgate
         floodgate.setPosition(1);
 
         //waits for user to press start
         waitForStart();
 
-        encoderForward(4.4, 1.0, leftMotor, rightMotor, opModeIsActive());
-        shootTwo(floodgate, launcher, opModeIsActive());
-        encoderTurn(21.32, 1.0, false, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(36, 1.0, leftMotor, rightMotor, opModeIsActive());
-
+        sleep(5000);
+        encoderForward(14.4, 1.0, leftMotor, rightMotor, opModeIsActive());
+        shootOne(floodgate, launcher, opModeIsActive());
     }
-
-
 }
