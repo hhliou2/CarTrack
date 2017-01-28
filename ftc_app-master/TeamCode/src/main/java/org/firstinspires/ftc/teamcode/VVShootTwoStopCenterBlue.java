@@ -13,7 +13,7 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Center Shoot Two Stop Blue", group="Stop")
+@Autonomous(name="Center Shoot Two Stop", group="Stop")
 public class VVShootTwoStopCenterBlue extends LinearOpMode {
 
     //initialize motors and floodgate servo.
