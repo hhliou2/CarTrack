@@ -16,6 +16,7 @@ public class VelocityVortexTank extends OpMode {
     DcMotor rightMotor;
     DcMotor loader;
     DcMotor launcher;
+    DcMotor noodler;
 
     Servo buttonPresser;
     Servo floodgate;
@@ -38,6 +39,7 @@ public class VelocityVortexTank extends OpMode {
         rightMotor = hardwareMap.dcMotor.get("right");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
+        noodler = hardwareMap.dcMotor.get("noodler");
 
         buttonPresser = hardwareMap.servo.get("button");
         floodgate = hardwareMap.servo.get("floodGate");
@@ -59,8 +61,10 @@ public class VelocityVortexTank extends OpMode {
 
             if(gamepad2.x) {
                 loader.setPower(-0.5);
+                noodler.setPower(-1.0);
             } else {
                 loader.setPower(0);
+                noodler.setPower(0);
             }
 
             if(gamepad1.y || gamepad2.y) {
@@ -114,8 +118,10 @@ public class VelocityVortexTank extends OpMode {
 
             if(gamepad2.x) {
                 loader.setPower(-0.5);
+                noodler.setPower(-1.0);
             } else {
                 loader.setPower(0);
+                noodler.setPower(0);
             }
 
             if(gamepad1.y || gamepad2.y) {
