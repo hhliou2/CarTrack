@@ -62,7 +62,7 @@ public class VVShootOneParkCenterBlue extends LinearOpMode {
         encoderForward(12.4, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
         encoderTurn(14.82, 1.0, true, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(55, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(53, 1.0, leftMotor, rightMotor, opModeIsActive());
 
     }
 
