@@ -13,7 +13,7 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Corner Shoot One Stop", group="Stop")
+@Autonomous(name="Corner Shoot Two Stop", group="Stop")
 public class VVShootTwoStopCorner extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
