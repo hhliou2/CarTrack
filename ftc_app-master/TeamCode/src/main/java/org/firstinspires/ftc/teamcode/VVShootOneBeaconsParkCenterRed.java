@@ -62,7 +62,7 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderForward(12.4, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(4.4, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
         encoderTurn(27.57333, 1.0, false, leftMotor, rightMotor, opModeIsActive());
         encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
