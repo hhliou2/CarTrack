@@ -39,7 +39,7 @@ public class VVShootOneStopCenterRed extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderForward(4.4, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(2.4, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive()); }
 }
 
