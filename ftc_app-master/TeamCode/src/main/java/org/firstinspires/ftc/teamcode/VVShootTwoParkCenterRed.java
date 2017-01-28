@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
+import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -60,9 +61,9 @@ public class VVShootTwoParkCenterRed extends LinearOpMode {
         waitForStart();
 
         encoderForward(12.4, 1.0, leftMotor, rightMotor, opModeIsActive());
-        shootOne(floodgate, launcher, opModeIsActive());
-        encoderTurn(12.777, 1.0, false, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(52, 1.0, leftMotor, rightMotor, opModeIsActive());
+        shootTwo(floodgate, launcher, opModeIsActive());
+        encoderTurn(15.777, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(28, 1.0, leftMotor, rightMotor, opModeIsActive());
 
     }
 

@@ -65,10 +65,10 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
 
         encoderForward(14, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderTurn(15.196, 1.0, true, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-58.601, -1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(19.788, 1.0, false, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        encoderTurn(24.736, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-125.39941, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(28.0835, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -76,7 +76,7 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);

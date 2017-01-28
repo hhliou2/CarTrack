@@ -62,12 +62,12 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderForward(14, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(12.4, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderTurn(17.396, 1.0, true, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-56.301, -1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(19.388, 1.0, false, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        encoderTurn(24.736, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-125.3994, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderTurn(28.0835, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
@@ -76,7 +76,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red() && opModeIsActive());
 
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
