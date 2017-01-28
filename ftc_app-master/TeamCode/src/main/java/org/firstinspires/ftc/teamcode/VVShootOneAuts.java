@@ -60,6 +60,7 @@ public class VVShootOneAuts extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
+        sleep(7000);
         encoderForward(14.4, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
         encoderForward(36, 1.0, leftMotor, rightMotor, opModeIsActive());

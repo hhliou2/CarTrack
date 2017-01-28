@@ -84,9 +84,10 @@ public class VelocityVortexTank extends OpMode {
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
                 buttonPresser.setPosition(1);
+            } else if (gamepad2.left_bumper || gamepad1.left_bumper)
+                buttonPresser.setPosition(0);
             } else {
                 buttonPresser.setPosition(0);
-            }
 
             if (gamepad1.dpad_up) {
                 floodgate.setPosition(0);
@@ -145,6 +146,9 @@ public class VelocityVortexTank extends OpMode {
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
                 buttonPresser.setPosition(1);
+            }
+            else if (gamepad2.left_bumper || gamepad1.left_bumper) {
+                buttonPresser.setPosition(0);
             } else {
                 buttonPresser.setPosition(0);
             }
