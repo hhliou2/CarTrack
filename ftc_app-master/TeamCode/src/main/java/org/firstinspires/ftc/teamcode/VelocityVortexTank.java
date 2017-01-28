@@ -60,14 +60,12 @@ public class VelocityVortexTank extends OpMode {
             leftMotor.setPower(rightDrive);
 
             if(gamepad2.a) {
-                noodler.setPower(1.0);
-            } else {
-                noodler.setPower(0);
+                noodler.setPower(0.5);
             }
 
-            if(gamepad2.x) {
+            else if(gamepad2.x) {
                 loader.setPower(-0.5);
-                noodler.setPower(-1.0);
+                noodler.setPower(-0.5);
             } else {
                 loader.setPower(0);
                 noodler.setPower(0);
@@ -123,14 +121,12 @@ public class VelocityVortexTank extends OpMode {
             leftMotor.setPower(leftDrive);
 
             if(gamepad2.a) {
-                noodler.setPower(1.0);
-            } else {
-                noodler.setPower(0);
+                noodler.setPower(0.5);
             }
 
-            if(gamepad2.x) {
+            else if(gamepad2.x) {
                 loader.setPower(-0.5);
-                noodler.setPower(-1.0);
+                noodler.setPower(-0.5);
             } else {
                 loader.setPower(0);
                 noodler.setPower(0);
