@@ -60,7 +60,7 @@ public class VVShootTwoParkCornerBlue extends LinearOpMode {
         waitForStart();
 
         sleep(10000);
-        encoderForward(14.4, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(13.65, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
         encoderTurn(12.41, 1.0, false, leftMotor, rightMotor, opModeIsActive());
         encoderForward(88.6037, 1.0, leftMotor, rightMotor, opModeIsActive());

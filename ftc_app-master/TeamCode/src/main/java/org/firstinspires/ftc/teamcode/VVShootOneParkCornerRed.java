@@ -60,7 +60,7 @@ public class VVShootOneParkCornerRed extends LinearOpMode {
         waitForStart();
 
             sleep(10000);
-        encoderForward(14.4, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(13.65, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
         encoderTurn(6.38888, 1.0, true, leftMotor, rightMotor, opModeIsActive());
         encoderForward(88.6037, 1.0, leftMotor, rightMotor, opModeIsActive());
