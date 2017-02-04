@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Kys_code.iml" filepath="$PROJECT_DIR$/.idea/Kys_code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" filepath="$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TeamCode/TeamCode.iml" filepath="$PROJECT_DIR$/TeamCode/TeamCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kys.iml" filepath="$PROJECT_DIR$/kys.iml" />
     </modules>
   </component>
 </project>
