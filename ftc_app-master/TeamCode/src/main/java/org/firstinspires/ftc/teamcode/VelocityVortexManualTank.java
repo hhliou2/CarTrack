@@ -72,12 +72,12 @@ public class VelocityVortexManualTank extends OpMode {
                 noodler.setPower(0);
             }
 
-            if(gamepad1.dpad_down) {
+            if(gamepad1.dpad_up) {
                 launcher.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                launcher.setPower(-0.5);
-            } else if(gamepad1.dpad_up) {
+                launcher.setPower(-1.0);
+            } else if(gamepad1.dpad_down) {
                 launcher.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                launcher.setPower(1);
+                launcher.setPower(0.5);
             } else {
                 launcher.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 launcher.setPower(0);
@@ -91,8 +91,9 @@ public class VelocityVortexManualTank extends OpMode {
                 buttonPresser.setPosition(0);
             }
             if (gamepad2.dpad_up) {
-                floodgate.setPosition(0);
 
+                floodgate.setPosition(0);
+            } else {
                 floodgate.setPosition(1);
             }
 
@@ -124,12 +125,12 @@ public class VelocityVortexManualTank extends OpMode {
                 noodler.setPower(0);
             }
 
-            if(gamepad1.dpad_down) {
+            if(gamepad1.dpad_up) {
                 launcher.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                launcher.setPower(-0.5);
-            } else if(gamepad1.dpad_up) {
+                launcher.setPower(-1.0);
+            } else if(gamepad1.dpad_down) {
                 launcher.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                launcher.setPower(1);
+                launcher.setPower(0.5);
             } else {
                 launcher.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 launcher.setPower(0);
@@ -146,7 +147,7 @@ public class VelocityVortexManualTank extends OpMode {
 
             if (gamepad2.dpad_up) {
                 floodgate.setPosition(0);
-
+            } else {
                 floodgate.setPosition(1);
             }
 
