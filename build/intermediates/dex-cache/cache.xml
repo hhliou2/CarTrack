@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\Analytics-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9dafed45e330aec14abcce05bdb7bbdb2a2d7092">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Analytics-release_b4096cdcb00bad54467c4bc2ace826bd35663869.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\WirelessP2p-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9403be210676ed196cdcc64c7391b9ae2361c174">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-WirelessP2p-release_3a97b62eddd55306d7b2b7f9d3c54b21f1a1da22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\FtcCommon-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="42c41c87fc12bbc65308fd3f55c87d2e1cdf8912">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-FtcCommon-release_8d5e5e3d6414853135169e8366c10b0109349c70.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="e42e428aa63cbbf81e1d9e75963ca3d59e3b3ee0">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\instant-run_1704b4ca09e5a3d078a172ca1d18d31cbd249802.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\ModernRobotics-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="01999c87afe3d10ffa06f3efa66f39e61e6aba0c">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-ModernRobotics-release_a80838d07bd91fdc8b8d893d434f4297eae9aef3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\RobotCore-release\jars\libs\d2xx.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="04004e5f55992d1d8a105a4ade7be348986ed34e">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\d2xx_7835bb50f8b79699bdee1c082c71ea34140385ab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\Inspection-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9bf02f41db1f6ec91af06ec508925c91ac5c72e9">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Inspection-release_bcce9796342853075787cb21ce396a497fd0fa54.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\RobotCore-release\jars\libs\gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f6a826116ec7bc3c38197e60ff96e806e2a323b8">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\gson-2.7_9571ecc674777a0a2aec7310570c5f9a61dc3c24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\Hardware-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a82bee948963c3d4ed5b535c680c3183f5d1bcb6">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Hardware-release_e3b87067255a5421bcd747603b87dd976e2fcdd6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\RobotCore-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="51343b483c5a260b7203ac91d9009f27d38d8e3d">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-RobotCore-release_728b5e230ae5008ef029e9939a0109f2722a2497.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\RobotCore-release\jars\libs\Vuforia.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="58b9241fc73757cb6e0cdc32422a71a8e7e6d178">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\Vuforia_e7b0b0fa36e8f1bdb11a9e0f4d41dbea90b7b5de.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\RobotCore-release\jars\libs\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ba3817622501fb5da8e6b967e42c6717fbd26b02">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_637151afcfad9e65c44249e1593e39e0a51297b3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\exploded-aar\Blocks-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="bfdfb2339e516dcb78b53e85a9f32e33ee71833f">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Blocks-release_4aa054f3f27f25131dae62c29f69243a0f0893bf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="52df2f1b20c2a74280f1fbbfcd65cdfacc08a4d1">
+        <dex dex="C:\Users\Hasan\Desktop\kys\kys\TeamCode\build\intermediates\pre-dexed\debug\instant-run-bootstrap_5df586d95c20c6ccf76100e5a3f1e7649dfad8e1.jar" />
+    </item>
+
+</items>

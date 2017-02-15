@@ -13,21 +13,21 @@ import static java.lang.Thread.sleep;
 public class MethodSlave {
 
     //sets several constants
-    private final static int ENCODER_CPR = 1440;
+    private final static int ENCODER_CPR = 1120;
     private final static double GEAR_RATIO = 1;
-    private final static int WHEEL_DIAMETER = 3;
+    private final static int WHEEL_DIAMETER = 2;
 
     //gets circumference of wheel
     private final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
 
     //sets several constants
-    private final static int ENCODER_CPR_ANDYMARK = 1680;
-    private final static double GEAR_RATIO_ANDYMARK = 4;
-    private final static int ROTATIONS_ANDYMARK = 1;
+    private final static int ENCODER_CPR_NEVEREST60 = 1680;
+    private final static double GEAR_RATIO_NEVEREST60 = 4;
+    private final static int ROTATIONS_NEVEREST60 = 1;
 
     //sets value to be sent to encoder
-    private final static double COUNTS_ANDYMARK = ENCODER_CPR_ANDYMARK * ROTATIONS_ANDYMARK * GEAR_RATIO_ANDYMARK;
-    
+    private final static double COUNTS_NEVEREST60 = ENCODER_CPR_NEVEREST60 * ROTATIONS_NEVEREST60 * GEAR_RATIO_NEVEREST60;
+
 
     public static void encoderForward(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
@@ -113,7 +113,7 @@ public class MethodSlave {
         //start encoder run cycle, turns to next beacon
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        launcher.setTargetPosition((int) -COUNTS_ANDYMARK);
+        launcher.setTargetPosition((int) -COUNTS_NEVEREST60);
 
         launcher.setPower(-1.0);
 
@@ -132,7 +132,7 @@ public class MethodSlave {
         //start encoder run cycle, turns to next beacon
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        launcher.setTargetPosition((int) -COUNTS_ANDYMARK);
+        launcher.setTargetPosition((int) -COUNTS_NEVEREST60);
 
         launcher.setPower(-1.0);
 
@@ -150,7 +150,7 @@ public class MethodSlave {
 
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        launcher.setTargetPosition((int) -COUNTS_ANDYMARK);
+        launcher.setTargetPosition((int) -COUNTS_NEVEREST60);
 
         launcher.setPower(-1.0);
 
