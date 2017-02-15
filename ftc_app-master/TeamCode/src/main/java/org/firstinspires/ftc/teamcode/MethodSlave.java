@@ -27,6 +27,7 @@ public class MethodSlave {
 
     //sets value to be sent to encoder
     private final static double COUNTS_ANDYMARK = ENCODER_CPR_ANDYMARK * ROTATIONS_ANDYMARK * GEAR_RATIO_ANDYMARK;
+    
 
     public static void encoderForward(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
