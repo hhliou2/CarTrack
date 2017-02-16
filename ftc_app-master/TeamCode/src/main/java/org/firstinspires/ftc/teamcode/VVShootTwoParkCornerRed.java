@@ -58,6 +58,8 @@ public class VVShootTwoParkCornerRed extends LinearOpMode {
         //close the floodgate
         floodgate.setPosition(1);
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
+
         //waits for user to press start
         waitForStart();
 

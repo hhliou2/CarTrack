@@ -4,8 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.swingRight;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -19,20 +21,30 @@ public class Test180 extends LinearOpMode {
     DcMotor leftMotor;
     DcMotor rightMotor;
     GyroSensor gyro;
-
+    Servo buttonPresser;
 
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
         leftMotor = hardwareMap.dcMotor.get("left");
         rightMotor = hardwareMap.dcMotor.get("right");
+        gyro = hardwareMap.gyroSensor.get("gyro");
+        buttonPresser = hardwareMap.servo.get("button");
+
+        buttonPresser.setPosition(0);
 
         //waits for user to press start
         waitForStart();
 
         gyro.calibrate();
-        sleep(3000);
-        gyroTurn(180, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
+        if (gyro.isCalibrating()) {
+            sleep(3000);
+        }
+        swingRight(180, 1.0, leftMotor, rightMotor, gyro, opModeIsActive());
+        while(opModeIsActive()) {
+            telemetry.update();
+            telemetry.addData("Gyro pls: ", gyro.getHeading());
+        }
     }
 
 

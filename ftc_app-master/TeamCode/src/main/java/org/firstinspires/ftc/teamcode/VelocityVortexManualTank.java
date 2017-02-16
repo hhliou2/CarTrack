@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
@@ -21,6 +22,8 @@ public class VelocityVortexManualTank extends OpMode {
 
     Servo buttonPresser;
     Servo floodgate;
+
+    GyroSensor gyro;
 
     boolean isBackWheelDrive;
 
@@ -45,6 +48,7 @@ public class VelocityVortexManualTank extends OpMode {
         buttonPresser = hardwareMap.servo.get("button");
         floodgate = hardwareMap.servo.get("floodGate");
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
         isBackWheelDrive = false;
         floodgate.setPosition(1);
         buttonPresser.setPosition(0);
@@ -163,5 +167,6 @@ public class VelocityVortexManualTank extends OpMode {
         }
 
         telemetry.addData("Is Front Wheel Drive?", isBackWheelDrive);
+        telemetry.addData("Gyro Heading: ", gyro.getHeading());
     }
 }

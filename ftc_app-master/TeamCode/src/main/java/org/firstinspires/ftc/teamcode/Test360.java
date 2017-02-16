@@ -26,6 +26,7 @@ public class Test360 extends LinearOpMode {
         //initializes components to names on phone
         leftMotor = hardwareMap.dcMotor.get("left");
         rightMotor = hardwareMap.dcMotor.get("right");
+        gyro = hardwareMap.gyroSensor.get("gyro");
 
         //waits for user to press start
         waitForStart();

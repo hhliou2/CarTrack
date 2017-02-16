@@ -55,6 +55,8 @@ public class VVShootOneParkCenterRed extends LinearOpMode {
 
         touch = hardwareMap.touchSensor.get("touch");
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
+
         //close the floodgate
         floodgate.setPosition(1);
 
