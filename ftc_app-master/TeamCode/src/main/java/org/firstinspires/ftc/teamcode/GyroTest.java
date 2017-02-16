@@ -24,13 +24,11 @@ public class GyroTest extends OpMode {
 
     @Override
     public void loop() {
-        if (!gyro.isCalibrating()) {
             telemetry.addData("Heading: ", gyro.getHeading());
             telemetry.addData("Status: ", gyro.status());
             telemetry.addData("Rotation Fraction: ", gyro.getRotationFraction());
             telemetry.addData("Raw X: ", gyro.rawX());
             telemetry.addData("Raw Y: ", gyro.rawY());
             telemetry.addData("Raw Z: ", gyro.rawZ());
-        }
     }
 }
