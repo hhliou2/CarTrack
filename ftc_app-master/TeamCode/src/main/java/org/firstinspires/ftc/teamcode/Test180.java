@@ -3,8 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -17,6 +18,7 @@ public class Test180 extends LinearOpMode {
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
     DcMotor rightMotor;
+    GyroSensor gyro;
 
 
     @Override
@@ -28,7 +30,9 @@ public class Test180 extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderTurn(25, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        gyro.calibrate();
+        sleep(3000);
+        gyroTurn(180, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
     }
 
 

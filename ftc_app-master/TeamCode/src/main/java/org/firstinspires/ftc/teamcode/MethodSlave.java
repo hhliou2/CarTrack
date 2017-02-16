@@ -57,13 +57,67 @@ public class MethodSlave {
         //end of cycle
     }
 
-    public static void encoderTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor,GyroSensor gyro,
+    public static void RealEncoderForwardLeft(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+        double rotations = distance / CIRCUMFERENCE;
+        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
+
+        //start encoder run cycle, turns to next beacon
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftMotor.setTargetPosition((int) counts);
+        rightMotor.setTargetPosition((int) counts);
+
+        leftMotor.setPower(speed);
+        rightMotor.setPower(speed);
+
+        while (leftMotor.isBusy() && opModeIsActive) {
+            leftMotor.setPower(speed);
+            rightMotor.setPower(speed);
+        }
+
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //end of cycle
+    }
+
+    public static void RealEncoderForwardRight(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+        double rotations = distance / CIRCUMFERENCE;
+        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
+
+        //start encoder run cycle, turns to next beacon
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftMotor.setTargetPosition((int) -counts);
+        rightMotor.setTargetPosition((int) -counts);
+
+        leftMotor.setPower(-speed);
+        rightMotor.setPower(-speed);
+
+        while (leftMotor.isBusy() && opModeIsActive) {
+            leftMotor.setPower(-speed);
+            rightMotor.setPower(-speed);
+        }
+
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //end of cycle
+    }
+
+    public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor,GyroSensor gyro,
                                    boolean opModeIsActive) {
         if (isLeft) {
             leftMotor.setPower(speed);
             rightMotor.setPower(speed);
 
-            while (gyro.getHeading() > angle - 1 && gyro.getHeading() < angle + 1 && opModeIsActive) {
+            while (gyro.getHeading() > (360 - angle) - 1 && gyro.getHeading() < (360 - angle) + 1 && opModeIsActive) {
                 leftMotor.setPower(speed);
                 rightMotor.setPower(speed);
             }
@@ -74,7 +128,7 @@ public class MethodSlave {
             leftMotor.setPower(-speed);
             rightMotor.setPower(-speed);
 
-            while (gyro.getHeading() > (360 - angle) - 1 && gyro.getHeading() <(360 - angle) + 1 && opModeIsActive) {
+            while (gyro.getHeading() > angle - 1 && gyro.getHeading() < angle + 1 && opModeIsActive) {
                 leftMotor.setPower(-speed);
                 rightMotor.setPower(-speed);
             }
@@ -84,62 +138,34 @@ public class MethodSlave {
         }
     }
 
-    public static void swingLeft(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor,
+    public static void swingLeft(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
-
-        double rotations = distance / CIRCUMFERENCE;
-        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
-
-        //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftMotor.setTargetPosition(0);
-        rightMotor.setTargetPosition((int) counts);
 
         leftMotor.setPower(0);
         rightMotor.setPower(speed);
 
-        while (leftMotor.isBusy() && opModeIsActive) {
+        while (gyro.getHeading() > (360 - angle) - 1 && gyro.getHeading() <(360 - angle) + 1 && opModeIsActive) {
             leftMotor.setPower(0);
             rightMotor.setPower(speed);
         }
 
         leftMotor.setPower(0);
         rightMotor.setPower(0);
-
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //end of cycle
     }
 
-    public static void swingRight(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor,
+    public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
-
-        double rotations = distance / CIRCUMFERENCE;
-        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
-
-        //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftMotor.setTargetPosition((int) counts);
-        rightMotor.setTargetPosition(0);
 
         leftMotor.setPower(-speed);
         rightMotor.setPower(0);
 
-        while (leftMotor.isBusy() && opModeIsActive) {
+        while (gyro.getHeading() > angle - 1 && gyro.getHeading() < angle + 1 && opModeIsActive) {
             leftMotor.setPower(-speed);
             rightMotor.setPower(0);
         }
 
         leftMotor.setPower(0);
         rightMotor.setPower(0);
-
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //end of cycle
     }
 
     public static void shootOne(Servo floodgate, DcMotor launcher, boolean opModeIsActive) {
