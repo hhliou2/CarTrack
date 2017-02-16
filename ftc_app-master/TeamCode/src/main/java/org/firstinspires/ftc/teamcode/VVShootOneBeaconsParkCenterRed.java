@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
@@ -38,6 +39,7 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
 
     TouchSensor touch;
 
+    GyroSensor gyro;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -64,9 +66,9 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
 
         encoderForward(4.4, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderTurn(27.57333, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(4.926, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(4.926, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);

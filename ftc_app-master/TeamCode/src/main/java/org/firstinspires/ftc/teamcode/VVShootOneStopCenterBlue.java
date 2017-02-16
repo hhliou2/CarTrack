@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
@@ -47,5 +46,6 @@ public class VVShootOneStopCenterBlue extends LinearOpMode {
         waitForStart();
 
         encoderForward(2.4, 1.0, leftMotor, rightMotor,opModeIsActive());
-        shootOne(floodgate, launcher, opModeIsActive()); }
+        shootOne(floodgate, launcher, opModeIsActive());
+    }
 }

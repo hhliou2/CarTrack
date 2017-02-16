@@ -5,12 +5,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 
@@ -38,6 +39,7 @@ public class VVShootTwoBeaconsParkCornerBlue extends LinearOpMode {
 
     TouchSensor touch;
 
+    GyroSensor gyro;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -64,15 +66,15 @@ public class VVShootTwoBeaconsParkCornerBlue extends LinearOpMode {
 
         encoderForward(49, 0.5, leftMotor, rightMotor,opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderTurn(5, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(5, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(30, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(10, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(10, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
-        encoderTurn(10, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(10, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(-18, -1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(10, 1, true, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(10, 1, true, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(144, 1, leftMotor, rightMotor, opModeIsActive());
-        encoderTurn(5, 1, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(5, 1, false, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(12, 1, leftMotor, rightMotor, opModeIsActive());
     }
 

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 

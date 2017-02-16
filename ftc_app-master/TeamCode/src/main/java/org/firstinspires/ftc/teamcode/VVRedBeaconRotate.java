@@ -3,8 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 
 /**
  * Created by Fluff on 1/28/2017.
@@ -18,6 +19,7 @@ public class VVRedBeaconRotate extends LinearOpMode {
     DcMotor leftMotor;
     DcMotor rightMotor;
 
+    GyroSensor gyro;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -28,9 +30,9 @@ public class VVRedBeaconRotate extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderTurn(27.57333, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         sleep(2000);
-        encoderTurn(5.426, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(5.426, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
     }
 
 

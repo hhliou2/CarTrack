@@ -4,12 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -35,6 +36,7 @@ public class VVShootOneParkCornerRed extends LinearOpMode {
 
     TouchSensor touch;
 
+    GyroSensor gyro;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -62,7 +64,7 @@ public class VVShootOneParkCornerRed extends LinearOpMode {
             sleep(10000);
         encoderForward(13.65, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderTurn(6.38888, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(6.38888, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(88.6037, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 

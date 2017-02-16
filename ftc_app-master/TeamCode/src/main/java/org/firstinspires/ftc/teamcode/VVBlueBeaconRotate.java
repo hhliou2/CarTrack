@@ -3,8 +3,9 @@ package org.firstinspires.ftc.teamcode;
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.hardware.DcMotor;
+        import com.qualcomm.robotcore.hardware.GyroSensor;
 
-        import static org.firstinspires.ftc.teamcode.MethodSlave.encoderTurn;
+        import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 /**
  * Created by Fluff on 1/28/2017.
  */
@@ -17,6 +18,7 @@ package org.firstinspires.ftc.teamcode;
         //initialize motors, servos, booleans, and sensors
         DcMotor leftMotor;
         DcMotor rightMotor;
+        GyroSensor gyro;
 
 
         @Override
@@ -28,9 +30,9 @@ package org.firstinspires.ftc.teamcode;
             //waits for user to press start
             waitForStart();
 
-            encoderTurn(24.736, 1.0, true, leftMotor, rightMotor, opModeIsActive());
+            gyroTurn(24.736, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
             sleep(2000);
-            encoderTurn(28.0835, 1.0, false, leftMotor, rightMotor, opModeIsActive());
+            gyroTurn(28.0835, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         }
 
 
