@@ -64,10 +64,10 @@ public class MethodSlaveTest extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        gyroTurn(90, 0.5, true, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(90, 0.25, true, leftMotor, rightMotor, gyro, opModeIsActive());
         gyro.calibrate();
         sleep(3000);
-        gyroTurn(90, 0.5, false, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(90, 0.25, false, leftMotor, rightMotor, gyro, opModeIsActive());
     }
 
 
