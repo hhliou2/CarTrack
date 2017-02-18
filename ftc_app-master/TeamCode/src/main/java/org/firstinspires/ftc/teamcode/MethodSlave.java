@@ -16,7 +16,7 @@ public class MethodSlave {
     //sets several constants
     private final static int ENCODER_CPR = 1120;
     private final static double GEAR_RATIO = 1;
-    private final static int WHEEL_DIAMETER = 2;
+    private final static int WHEEL_DIAMETER = 3;
 
     //gets circumference of wheel
     private final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
