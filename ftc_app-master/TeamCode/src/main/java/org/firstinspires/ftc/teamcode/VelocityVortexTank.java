@@ -53,8 +53,8 @@ public class VelocityVortexTank extends OpMode {
     public void loop() {
 
         if (isBackWheelDrive) {
-            float leftDrive = gamepad1.left_stick_y;
-            float rightDrive = -gamepad1.right_stick_y;
+            float leftDrive = -gamepad1.left_stick_y;
+            float rightDrive = gamepad1.right_stick_y;
 
             rightMotor.setPower(leftDrive);
             leftMotor.setPower(rightDrive);
