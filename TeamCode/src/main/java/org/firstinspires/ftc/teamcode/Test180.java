@@ -32,7 +32,4 @@ public class Test180 extends LinearOpMode {
     }
 
 }
-/**
- * I like big butts and I cannot lie
- * -BLING2000
- */
+// i  a m  g a y b o i - bread
