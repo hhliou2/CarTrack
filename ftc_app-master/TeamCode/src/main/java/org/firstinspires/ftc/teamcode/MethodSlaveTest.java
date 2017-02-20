@@ -4,9 +4,15 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+
+import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -31,6 +37,7 @@ public class MethodSlaveTest extends LinearOpMode {
 
     TouchSensor touch;
 
+    GyroSensor gyro;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -49,11 +56,18 @@ public class MethodSlaveTest extends LinearOpMode {
 
         touch = hardwareMap.touchSensor.get("touch");
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
         //close the floodgate
         floodgate.setPosition(1);
 
+        gyro.calibrate();
         //waits for user to press start
         waitForStart();
+
+        gyroTurn(90, 0.25, true, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyro.calibrate();
+        sleep(3000);
+        gyroTurn(90, 0.25, false, leftMotor, rightMotor, gyro, opModeIsActive());
     }
 
 

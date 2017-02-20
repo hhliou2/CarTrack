@@ -27,6 +27,8 @@ public class VVRedBeaconRotate extends LinearOpMode {
         leftMotor = hardwareMap.dcMotor.get("left");
         rightMotor = hardwareMap.dcMotor.get("right");
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
+
         //waits for user to press start
         waitForStart();
 
