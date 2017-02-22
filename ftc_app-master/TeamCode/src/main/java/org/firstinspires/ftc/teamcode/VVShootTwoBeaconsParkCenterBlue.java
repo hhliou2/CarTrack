@@ -27,6 +27,9 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.swingRight;
 @Autonomous(name="Center Shoot Two Beacons Park Blue", group="Beacon")
 public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
 
+    //sets the shooting distance, can be a simple fix after consistency testing
+    private double SHOOTING_DISTANCE = 7;
+
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
     DcMotor rightMotor;
@@ -69,12 +72,11 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
         //waits for user to press start
 
         waitForStart();
-        //sets the shooting distance, can be a simple fix after consistency testing
-        int shootingDistance = 69696969;
 
-        encoderForward(shootingDistance, 1.0, leftMotor, rightMotor, opModeIsActive());
+
+        encoderForward(SHOOTING_DISTANCE, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderForward(28 - shootingDistance, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(28 - SHOOTING_DISTANCE, 1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardLeft(10.524335, 0.3, leftMotor, rightMotor, opModeIsActive());
 
         //we run into the wall to create the constant

@@ -115,7 +115,7 @@ public class MethodSlave {
                                    boolean opModeIsActive) {
         if (isLeft) {
 
-            while (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2 && opModeIsActive) {
+            while ((gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2) && opModeIsActive) {
                 leftMotor.setPower(-speed);
                 rightMotor.setPower(-speed);
             }
@@ -124,7 +124,7 @@ public class MethodSlave {
             rightMotor.setPower(0);
         } else {
 
-            while (gyro.getHeading() < angle || gyro.getHeading() == 0 && opModeIsActive) {
+            while ((gyro.getHeading() < angle || gyro.getHeading() == 0) && opModeIsActive) {
                 leftMotor.setPower(speed);
                 rightMotor.setPower(speed);
             }
@@ -137,7 +137,7 @@ public class MethodSlave {
     public static void swingLeft(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
-        while (gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2) && opModeIsActive) {
+        while ((gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2)) && opModeIsActive) {
             leftMotor.setPower(0);
             rightMotor.setPower(-speed);
         }
@@ -149,7 +149,7 @@ public class MethodSlave {
     public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
-        while (gyro.getHeading() < angle || gyro.getHeading() == 0 && opModeIsActive) {
+        while ((gyro.getHeading() < angle || gyro.getHeading() == 0) && opModeIsActive) {
             leftMotor.setPower(speed);
             rightMotor.setPower(0);
         }
