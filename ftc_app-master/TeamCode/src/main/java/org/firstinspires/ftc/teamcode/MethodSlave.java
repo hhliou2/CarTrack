@@ -277,14 +277,14 @@ public class MethodSlave {
     public static void beaconCheckOut(Servo buttonPresser) {
         //checks color sensor value and presses beacon
 
-            buttonPresser.setPosition(0.8);
+            buttonPresser.setPosition(0);
 
     }
 
     public static void beaconCheckIn(Servo buttonPresser) {
         //checks color sensor value and presses beacon
 
-        buttonPresser.setPosition(0);
+        buttonPresser.setPosition(1.0);
 
     }
 }
