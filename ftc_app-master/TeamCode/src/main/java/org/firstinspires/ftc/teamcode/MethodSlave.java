@@ -60,6 +60,51 @@ public class MethodSlave {
         //end of cycle
     }
 
+    public static void gyroForward(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro, boolean opModeIsActive) {
+        double rotations = distance / CIRCUMFERENCE;
+        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
+
+        //sets gyro to 1
+        gyro.calibrate();
+
+        //start encoder run cycle, turns to next beacon
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftMotor.setTargetPosition((int) counts);
+        rightMotor.setTargetPosition((int) -counts);
+
+        leftMotor.setPower(speed);
+        rightMotor.setPower(-speed);
+
+        if((gyro.getHeading())>1 && (gyro.getHeading())<20 && opModeIsActive){
+            //if the robot is angled right, make the left motor slower
+            leftMotor.setPower(speed * 0.75);
+            rightMotor.setPower(-speed);
+        }
+        else if (((gyro.getHeading()) <= 359) && ((gyro.getHeading() >= 339)) && opModeIsActive ){
+            //if the robot is angled left, make the right motor slower
+            leftMotor.setPower(speed);
+            rightMotor.setPower(-speed * 0.75);
+        }
+        else{
+            //just go straight when facing straight
+            leftMotor.setPower(speed);
+            rightMotor.setPower(-speed);
+        }
+        while (leftMotor.isBusy() && opModeIsActive) {
+            leftMotor.setPower(speed);
+            rightMotor.setPower(-speed);
+        }
+
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //end of cycle
+    }
+
     public static void realEncoderForwardLeft(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
