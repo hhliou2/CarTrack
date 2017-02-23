@@ -1,19 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 
-import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
-import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
-import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 
@@ -22,8 +24,8 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Bacon Test", group="Test")
-public class BeaconTest extends LinearOpMode {
+@Autonomous(name="Range Sensor Test", group="Test")
+public class RangeSensorTest extends OpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -42,8 +44,11 @@ public class BeaconTest extends LinearOpMode {
 
     GyroSensor gyro;
 
+    ModernRoboticsI2cRangeSensor rangeFront;
+    ModernRoboticsI2cRangeSensor rangeBack;
+
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void init() {
         //initializes components to names on phone
         leftMotor = hardwareMap.dcMotor.get("left");
         rightMotor = hardwareMap.dcMotor.get("right");
@@ -60,56 +65,17 @@ public class BeaconTest extends LinearOpMode {
         touch = hardwareMap.touchSensor.get("touch");
 
         gyro = hardwareMap.gyroSensor.get("gyro");
+
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
+        rangeBack = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "brange");
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(1);
-
-        gyro.calibrate();
         //waits for user to press start
-        waitForStart();
-
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, opModeIsActive());
-
-        beaconCheckOut(buttonPresser);
-        sleep(700);
-        beaconCheckIn(buttonPresser);
-        sleep(200);
-
-        if (color.blue() < color.red()) {
-            sleep(4400);
-        }
-
-        while (color.blue() < color.red() && opModeIsActive()) {
-            beaconCheckOut(buttonPresser);
-            sleep(700);
-            beaconCheckIn(buttonPresser);
-            sleep(700);
-        }
-
-
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, opModeIsActive());
-
-        beaconCheckOut(buttonPresser);
-        sleep(700);
-        beaconCheckIn(buttonPresser);
-        sleep(200);
-
-        if (color.blue() < color.red()) {
-            sleep(4400);
-        }
-
-        while (color.blue() < color.red() && opModeIsActive()) {
-            beaconCheckOut(buttonPresser);
-            sleep(700);
-            beaconCheckIn(buttonPresser);
-            sleep(700);
-        }
     }
 
-
+    @Override
+    public void loop() {
+        telemetry.addData("Back Sensor: ", rangeBack.getDistance(DistanceUnit.CM));
+        telemetry.addData("Front Sensor: ", rangeFront.getDistance(DistanceUnit.CM));
+    }
 }
-
-/*
-* I like big butts and Abe Lincoln cannot tell lies
-* -jaffli
- */
