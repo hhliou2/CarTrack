@@ -71,7 +71,7 @@ public class VVShootTwoBeaconsParkCornerBlue extends LinearOpMode {
         gyroTurn(5, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(30, 1.0, leftMotor, rightMotor, opModeIsActive());
         gyroTurn(10, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+
         gyroTurn(10, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(-18, -1, leftMotor, rightMotor, opModeIsActive());
         gyroTurn(10, 1, true, leftMotor, rightMotor, gyro, opModeIsActive());

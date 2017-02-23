@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -42,6 +43,8 @@ public class BeaconTest extends LinearOpMode {
 
     GyroSensor gyro;
 
+    ModernRoboticsI2cRangeSensor rangeFront;
+
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
@@ -65,10 +68,12 @@ public class BeaconTest extends LinearOpMode {
         buttonPresser.setPosition(1);
 
         gyro.calibrate();
+
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
         //waits for user to press start
         waitForStart();
 
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);
@@ -87,7 +92,7 @@ public class BeaconTest extends LinearOpMode {
         }
 
 
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);
