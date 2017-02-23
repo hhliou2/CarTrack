@@ -116,8 +116,12 @@ public class MethodSlave {
         if (isLeft) {
 
             while ((gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2) && opModeIsActive) {
-                leftMotor.setPower(-speed);
-                rightMotor.setPower(-speed);
+                if (opModeIsActive) {
+                    leftMotor.setPower(-speed);
+                    rightMotor.setPower(-speed);
+                } else {
+                    return;
+                }
             }
 
             leftMotor.setPower(0);
@@ -125,8 +129,12 @@ public class MethodSlave {
         } else {
 
             while ((gyro.getHeading() < angle || gyro.getHeading() == 0) && opModeIsActive) {
-                leftMotor.setPower(speed);
-                rightMotor.setPower(speed);
+                if (opModeIsActive) {
+                    leftMotor.setPower(speed);
+                    rightMotor.setPower(speed);
+                } else {
+                    return;
+                }
             }
 
             leftMotor.setPower(0);
@@ -137,9 +145,13 @@ public class MethodSlave {
     public static void swingLeft(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
-        while ((gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2)) && opModeIsActive) {
-            leftMotor.setPower(0);
-            rightMotor.setPower(-speed);
+        while ((gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2))) {
+            if (opModeIsActive) {
+                leftMotor.setPower(0);
+                rightMotor.setPower(-speed);
+            } else {
+                return;
+            }
         }
 
         leftMotor.setPower(0);
@@ -149,9 +161,13 @@ public class MethodSlave {
     public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
-        while ((gyro.getHeading() < angle || gyro.getHeading() == 0) && opModeIsActive) {
-            leftMotor.setPower(speed);
-            rightMotor.setPower(0);
+        while ((gyro.getHeading() < angle || gyro.getHeading() == 0)) {
+            if (opModeIsActive) {
+                leftMotor.setPower(speed);
+                rightMotor.setPower(0);
+            } else {
+                return;
+            }
         }
 
         leftMotor.setPower(0);
