@@ -9,8 +9,11 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 
@@ -59,15 +62,29 @@ public class BeaconTest extends LinearOpMode {
         gyro = hardwareMap.gyroSensor.get("gyro");
         //close the floodgate
         floodgate.setPosition(1);
+        buttonPresser.setPosition(1);
 
         gyro.calibrate();
         //waits for user to press start
         waitForStart();
 
-        gyroTurn(77, 0.2, true, leftMotor, rightMotor, gyro, opModeIsActive());
-        gyro.calibrate();
-        sleep(3000);
-        gyroTurn(77, 0.2, false, leftMotor, rightMotor, gyro, opModeIsActive());
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, opModeIsActive());
+
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(200);
+
+        if (color.blue() < color.red()) {
+            sleep(4400);
+        }
+
+        while (color.blue() < color.red() && opModeIsActive()) {
+            beaconCheckOut(buttonPresser);
+            sleep(700);
+            beaconCheckIn(buttonPresser);
+            sleep(700);
+        }
     }
 
 
