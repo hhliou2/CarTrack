@@ -37,14 +37,10 @@ public class Test180 extends LinearOpMode {
         waitForStart();
 
         gyro.calibrate();
-        if (gyro.isCalibrating()) {
-            sleep(3000);
+        while (gyro.isCalibrating()) {
+            leftMotor.setPower(0);
         }
-        swingRight(180, 1.0, leftMotor, rightMotor, gyro, opModeIsActive());
-        while(opModeIsActive()) {
-            telemetry.update();
-            telemetry.addData("Gyro pls: ", gyro.getHeading());
-        }
+        swingRight(167, 0.4, leftMotor, rightMotor, gyro, opModeIsActive());
     }
 
 
