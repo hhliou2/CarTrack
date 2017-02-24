@@ -305,20 +305,20 @@ public class MethodSlave {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        if( frange.getDistance(DistanceUnit.CM)> 9){
-            leftMotor.setPower(speed);
-            rightMotor.setPower(-speed/2);
-        }
-        else if(frange.getDistance(DistanceUnit.CM)< 9){
-                leftMotor.setPower(speed/2);
-                rightMotor.setPower(-speed);
-        }
-
-
         if(isWhiteLine) {
             while (eopd.getLightDetected() < intensity && opModeIsActive) {
-                leftMotor.setPower(speed);
-                rightMotor.setPower(-speed);
+                if(frange.getDistance(DistanceUnit.CM)<9){
+                    leftMotor.setPower(speed/2);
+                    rightMotor.setPower(-speed);
+                }
+                else if(frange.getDistance(DistanceUnit.CM)>9){
+                    leftMotor.setPower(speed);
+                    rightMotor.setPower(-speed/2);
+                }
+                else{
+                    leftMotor.setPower(speed);
+                    rightMotor.setPower(-speed);
+                }
             }
 
             leftMotor.setPower(0);
