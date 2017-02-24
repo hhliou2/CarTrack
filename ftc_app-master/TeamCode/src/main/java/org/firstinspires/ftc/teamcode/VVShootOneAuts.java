@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
+import static org.firstinspires.ftc.teamcode.MethodSlave.encoderSlow;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -54,12 +55,14 @@ public class VVShootOneAuts extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(1);
+        buttonPresser.setPosition(1);
 
         //waits for user to press start
         waitForStart();
 
         sleep(7000);
-        encoderForward(21, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderSlow(5, 0.3, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(16, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
         encoderForward(45, 1.0, leftMotor, rightMotor, opModeIsActive());
     }

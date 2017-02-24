@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
@@ -72,6 +74,8 @@ public class BeaconTest extends LinearOpMode {
         rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
         //waits for user to press start
         waitForStart();
+
+        telemetry.addData("Front Sensor: ", rangeFront.getDistance(DistanceUnit.CM));
 
         lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 

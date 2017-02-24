@@ -72,7 +72,7 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
         rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
 
         //close the floodgate
-        floodgate.setPosition(0);
+        floodgate.setPosition(1);
         buttonPresser.setPosition(1);
         //waits for user to press start
 

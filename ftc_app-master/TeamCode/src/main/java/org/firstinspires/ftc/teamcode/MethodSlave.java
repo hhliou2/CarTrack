@@ -32,6 +32,28 @@ public class MethodSlave {
     //sets value to be sent to encoder
     private final static double COUNTS_NEVEREST60 = ENCODER_CPR_NEVEREST60 * ROTATIONS_NEVEREST60 * GEAR_RATIO_NEVEREST60;
 
+    public static void encoderSlow(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+        double rotations = distance / CIRCUMFERENCE;
+        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
+
+        //start encoder run cycle, turns to next beacon
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftMotor.setTargetPosition((int) counts);
+        rightMotor.setTargetPosition((int) -counts);
+
+        leftMotor.setPower(-speed * 0.80);
+        rightMotor.setPower(speed);
+
+        while (leftMotor.isBusy() && rightMotor.isBusy() && opModeIsActive) {
+            leftMotor.setPower(-speed * 0.8);
+            rightMotor.setPower(speed);
+        }
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
 
     public static void encoderForward(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
@@ -44,12 +66,12 @@ public class MethodSlave {
         leftMotor.setTargetPosition((int) counts);
         rightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(speed);
-        rightMotor.setPower(-speed);
+        leftMotor.setPower(-speed*0.8);
+        rightMotor.setPower(speed);
 
-        while (leftMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(speed);
-            rightMotor.setPower(-speed);
+        while (leftMotor.isBusy() && rightMotor.isBusy() && opModeIsActive) {
+            leftMotor.setPower(-speed*0.8);
+            rightMotor.setPower(speed);
         }
 
         leftMotor.setPower(0);
@@ -290,10 +312,6 @@ public class MethodSlave {
         else if(frange.getDistance(DistanceUnit.CM)< 9){
                 leftMotor.setPower(speed/2);
                 rightMotor.setPower(-speed);
-        }
-        else {
-            leftMotor.setPower(speed);
-            rightMotor.setPower(-speed);
         }
 
 
