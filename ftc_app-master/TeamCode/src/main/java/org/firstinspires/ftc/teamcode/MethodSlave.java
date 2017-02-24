@@ -17,7 +17,8 @@ import static java.lang.Thread.sleep;
 public class MethodSlave {
 
     //sets several constants
-    private final static int ENCODER_CPR = 1120;
+//    private final static int ENCODER_CPR = 1120;
+    private final static int ENCODER_CPR = 1440;
     private final static double GEAR_RATIO = 1;
     private final static int WHEEL_DIAMETER = 3;
 
