@@ -68,11 +68,11 @@ public class MethodSlave {
         leftMotor.setTargetPosition((int) counts);
         rightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(-speed * 0.8);
+        leftMotor.setPower(-speed*0.8);
         rightMotor.setPower(speed);
 
         while (leftMotor.isBusy() && rightMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(-speed * 0.8);
+            leftMotor.setPower(-speed*0.8);
             rightMotor.setPower(speed);
         }
 
@@ -103,15 +103,17 @@ public class MethodSlave {
 
 
         while (leftMotor.isBusy() && opModeIsActive) {
-            if ((gyro.getHeading()) > 1 && (gyro.getHeading()) < 20 && opModeIsActive) {
+            if((gyro.getHeading())>1 && (gyro.getHeading())<20 && opModeIsActive){
                 //if the robot is angled right, make the left motor slower
                 leftMotor.setPower(speed * 0.75);
                 rightMotor.setPower(-speed);
-            } else if (((gyro.getHeading()) <= 359) && ((gyro.getHeading() >= 339)) && opModeIsActive) {
+            }
+            else if (((gyro.getHeading()) <= 359) && ((gyro.getHeading() >= 339)) && opModeIsActive ){
                 //if the robot is angled left, make the right motor slower
                 leftMotor.setPower(speed);
                 rightMotor.setPower(-speed * 0.75);
-            } else {
+            }
+            else{
                 //just go straight when facing straight
                 leftMotor.setPower(speed);
                 rightMotor.setPower(-speed);
@@ -180,11 +182,11 @@ public class MethodSlave {
         //end of cycle
     }
 
-    public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
+    public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor,GyroSensor gyro,
                                 boolean opModeIsActive) {
         if (isLeft) {
 
-            while (opModeIsActive && (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2)) {
+            while ( opModeIsActive && (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2)) {
                 if (opModeIsActive) {
                     leftMotor.setPower(-speed);
                     rightMotor.setPower(-speed);
@@ -263,7 +265,7 @@ public class MethodSlave {
         floodgate.setPosition(1);
     }
 
-    public static void shootTwo(Servo floodgate, DcMotor launcher, boolean opModeIsActive) throws InterruptedException {
+    public static void shootTwo (Servo floodgate, DcMotor launcher, boolean opModeIsActive) throws InterruptedException {
         //start encoder run cycle, turns to next beacon
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -304,28 +306,39 @@ public class MethodSlave {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        while (opModeIsActive) {
-            if (eopd.getLightDetected() < intensity) {
-                frange.getDistance(DistanceUnit.CM);
-                if (frange.getDistance(DistanceUnit.CM) < 9) {
-                    leftMotor.setPower(-speed / 2);
-                    rightMotor.setPower(speed);
-                } else if (frange.getDistance(DistanceUnit.CM) > 9) {
-                    leftMotor.setPower(-speed);
-                    rightMotor.setPower(speed / 2);
-                } else {
-                    leftMotor.setPower(-speed);
-                    rightMotor.setPower(speed);
+        if(isWhiteLine) {
+            while (opModeIsActive) {
+                if (eopd.getLightDetected() < intensity) {
+                    frange.getDistance(DistanceUnit.CM);
+                    if (frange.getDistance(DistanceUnit.CM) < 9) {
+                        leftMotor.setPower(-speed / 3);
+                        rightMotor.setPower(speed);
+                    } else if (frange.getDistance(DistanceUnit.CM) > 9) {
+                        leftMotor.setPower(-speed);
+                        rightMotor.setPower(speed / 3);
+                    } else {
+                        leftMotor.setPower(-speed);
+                        rightMotor.setPower(speed);
+                    }
+                }else if(eopd.getLightDetected() > intensity){
+                    break;
                 }
-            } else {
-                break;
+
             }
-        }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
-    }
+            leftMotor.setPower(0);
+            rightMotor.setPower(0);
+        } /* else {
+           while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
+               leftMotor.setPower(speed);
+               rightMotor.setPower(-speed);
+           }
+           leftMotor.setPower(0);
+           rightMotor.setPower(0);
+       }
 
+   }
+*/}
     public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -365,7 +378,7 @@ public class MethodSlave {
     public static void beaconCheckOut(Servo buttonPresser) {
         //checks color sensor value and presses beacon
 
-            buttonPresser.setPosition(0);
+        buttonPresser.setPosition(0);
 
     }
 
@@ -376,3 +389,4 @@ public class MethodSlave {
 
     }
 }
+
