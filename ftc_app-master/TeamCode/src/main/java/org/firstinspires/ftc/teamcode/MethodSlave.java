@@ -186,7 +186,7 @@ public class MethodSlave {
                                    boolean opModeIsActive) {
         if (isLeft) {
 
-            while ((gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2) && opModeIsActive) {
+            while ( opModeIsActive && (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2)) {
                 if (opModeIsActive) {
                     leftMotor.setPower(-speed);
                     rightMotor.setPower(-speed);
@@ -199,7 +199,7 @@ public class MethodSlave {
             rightMotor.setPower(0);
         } else {
 
-            while ((gyro.getHeading() < angle || gyro.getHeading() == 0) && opModeIsActive) {
+            while (opModeIsActive && (gyro.getHeading() < angle || gyro.getHeading() == 0)) {
                 if (opModeIsActive) {
                     leftMotor.setPower(speed);
                     rightMotor.setPower(speed);
@@ -216,7 +216,7 @@ public class MethodSlave {
     public static void swingLeft(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
-        while ((gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2))) {
+        while (opModeIsActive && (gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2))) {
             if (opModeIsActive) {
                 leftMotor.setPower(0);
                 rightMotor.setPower(-speed);
@@ -232,7 +232,7 @@ public class MethodSlave {
     public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
-        while ((gyro.getHeading() < angle || gyro.getHeading() == 0)) {
+        while (opModeIsActive && (gyro.getHeading() < angle || gyro.getHeading() == 0)) {
             if (opModeIsActive) {
                 leftMotor.setPower(speed);
                 rightMotor.setPower(0);
@@ -307,7 +307,7 @@ public class MethodSlave {
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(isWhiteLine) {
-            while (eopd.getLightDetected() < intensity && opModeIsActive) {
+            while (opModeIsActive && (eopd.getLightDetected() < intensity)) {
                 frange.getDistance(DistanceUnit.CM);
                 if(frange.getDistance(DistanceUnit.CM)<9){
                     leftMotor.setPower(-speed/2);
@@ -330,7 +330,7 @@ public class MethodSlave {
             leftMotor.setPower(0);
             rightMotor.setPower(0);
         } else {
-            while (eopd.getLightDetected() > intensity && opModeIsActive) {
+            while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
                 leftMotor.setPower(speed);
                 rightMotor.setPower(-speed);
             }
