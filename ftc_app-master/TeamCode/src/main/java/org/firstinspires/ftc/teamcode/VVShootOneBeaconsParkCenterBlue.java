@@ -76,29 +76,54 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         gyro.calibrate();
         encoderForward(-2, -1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(-26, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-29, -1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardRight(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(55, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-10, -1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardLeft(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.15, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        encoderForward(48, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(9.4, 1.0, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.25, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
-        do {
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(200);
+
+        if (color.blue() < color.red()) {
+            sleep(4400);
+        }
+
+        while (color.blue() < color.red() && opModeIsActive()) {
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-        } while (color.blue() < color.red() && opModeIsActive());
+            if(!opModeIsActive()){
+                break;
+            }
+        }
 
-        lineApproach(0.15, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
-        do {
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(100);
+
+        if (color.blue() < color.red()) {
+            sleep(4600);
+        }
+
+        while (color.blue() < color.red() && opModeIsActive()) {
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-        } while (color.blue() < color.red() && opModeIsActive());
+            if(!opModeIsActive()){
+                break;
+            }
+        }
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        realEncoderForwardRight(15, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-59, -1.0, leftMotor, rightMotor, opModeIsActive());
     }
-
-
 }
