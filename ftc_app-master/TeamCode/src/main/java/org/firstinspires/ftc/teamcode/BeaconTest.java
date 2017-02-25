@@ -45,7 +45,7 @@ public class BeaconTest extends LinearOpMode {
 
     GyroSensor gyro;
 
-    ModernRoboticsI2cRangeSensor rangeFront;
+    ModernRoboticsI2cRangeSensor frange;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -71,13 +71,17 @@ public class BeaconTest extends LinearOpMode {
 
         gyro.calibrate();
 
-        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
+        frange = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
         //waits for user to press start
         waitForStart();
 
-        telemetry.addData("Front Sensor: ", rangeFront.getDistance(DistanceUnit.CM));
+        telemetry.addData("Front Sensor: ", frange.getDistance(DistanceUnit.CM));
 
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);
@@ -93,10 +97,12 @@ public class BeaconTest extends LinearOpMode {
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
+            if(!opModeIsActive()){
+                break;
+            }
         }
 
-
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.20, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);

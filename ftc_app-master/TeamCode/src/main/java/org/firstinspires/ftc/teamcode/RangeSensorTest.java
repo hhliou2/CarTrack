@@ -45,7 +45,6 @@ public class RangeSensorTest extends OpMode {
     GyroSensor gyro;
 
     ModernRoboticsI2cRangeSensor rangeFront;
-    ModernRoboticsI2cRangeSensor rangeBack;
 
     @Override
     public void init() {
@@ -67,7 +66,6 @@ public class RangeSensorTest extends OpMode {
         gyro = hardwareMap.gyroSensor.get("gyro");
 
         rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
-        rangeBack = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "brange");
         //close the floodgate
         floodgate.setPosition(1);
         //waits for user to press start
@@ -75,7 +73,11 @@ public class RangeSensorTest extends OpMode {
 
     @Override
     public void loop() {
-        telemetry.addData("Back Sensor: ", rangeBack.getDistance(DistanceUnit.CM));
         telemetry.addData("Front Sensor: ", rangeFront.getDistance(DistanceUnit.CM));
+        if(rangeFront.getDistance(DistanceUnit.CM) < 9) {
+            floodgate.setPosition(0.2);
+        } else {
+            floodgate.setPosition(0.7);
+        }
     }
 }

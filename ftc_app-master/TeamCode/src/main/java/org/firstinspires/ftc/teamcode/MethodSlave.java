@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import static java.lang.Thread.sleep;
@@ -100,24 +101,23 @@ public class MethodSlave {
         leftMotor.setPower(speed);
         rightMotor.setPower(-speed);
 
-        if((gyro.getHeading())>1 && (gyro.getHeading())<20 && opModeIsActive){
-            //if the robot is angled right, make the left motor slower
-            leftMotor.setPower(speed * 0.75);
-            rightMotor.setPower(-speed);
-        }
-        else if (((gyro.getHeading()) <= 359) && ((gyro.getHeading() >= 339)) && opModeIsActive ){
-            //if the robot is angled left, make the right motor slower
-            leftMotor.setPower(speed);
-            rightMotor.setPower(-speed * 0.75);
-        }
-        else{
-            //just go straight when facing straight
-            leftMotor.setPower(speed);
-            rightMotor.setPower(-speed);
-        }
+
         while (leftMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(speed);
-            rightMotor.setPower(-speed);
+            if((gyro.getHeading())>1 && (gyro.getHeading())<20 && opModeIsActive){
+                //if the robot is angled right, make the left motor slower
+                leftMotor.setPower(speed * 0.75);
+                rightMotor.setPower(-speed);
+            }
+            else if (((gyro.getHeading()) <= 359) && ((gyro.getHeading() >= 339)) && opModeIsActive ){
+                //if the robot is angled left, make the right motor slower
+                leftMotor.setPower(speed);
+                rightMotor.setPower(-speed * 0.75);
+            }
+            else{
+                //just go straight when facing straight
+                leftMotor.setPower(speed);
+                rightMotor.setPower(-speed);
+            }
         }
 
         leftMotor.setPower(0);
@@ -308,17 +308,22 @@ public class MethodSlave {
 
         if(isWhiteLine) {
             while (eopd.getLightDetected() < intensity && opModeIsActive) {
+                frange.getDistance(DistanceUnit.CM);
                 if(frange.getDistance(DistanceUnit.CM)<9){
-                    leftMotor.setPower(speed/2);
-                    rightMotor.setPower(-speed);
+                    leftMotor.setPower(-speed/2);
+                    rightMotor.setPower(speed);
                 }
                 else if(frange.getDistance(DistanceUnit.CM)>9){
-                    leftMotor.setPower(speed);
-                    rightMotor.setPower(-speed/2);
+                    leftMotor.setPower(-speed);
+                    rightMotor.setPower(speed/2);
                 }
                 else{
-                    leftMotor.setPower(speed);
-                    rightMotor.setPower(-speed);
+                    leftMotor.setPower(-speed);
+                    rightMotor.setPower(speed);
+                }
+
+                if(!opModeIsActive) {
+                    return;
                 }
             }
 
