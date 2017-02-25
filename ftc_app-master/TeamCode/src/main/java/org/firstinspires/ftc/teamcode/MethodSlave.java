@@ -34,6 +34,48 @@ public class MethodSlave {
     //sets value to be sent to encoder
     private final static double COUNTS_NEVEREST60 = ENCODER_CPR_NEVEREST60 * ROTATIONS_NEVEREST60 * GEAR_RATIO_NEVEREST60;
 
+    public static void rangeLeft(double range, double speed, DcMotor leftMotor, DcMotor rightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if(opModeIsActive){
+            if(frange.getDistance(DistanceUnit.CM) > range){
+                while ((frange.getDistance(DistanceUnit.CM) > range)) {
+                    leftMotor.setPower(speed);
+                    rightMotor.setPower(speed);
+                }
+            } else if (frange.getDistance(DistanceUnit.CM) <= range){
+                leftMotor.setPower(0);
+                rightMotor.setPower(0);
+            }
+        } else if (!opModeIsActive){
+            leftMotor.setPower(0);
+            rightMotor.setPower(0);
+        }
+
+    }
+
+    public static void rangeRight(double range, double speed, DcMotor leftMotor, DcMotor rightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if(opModeIsActive){
+            if(frange.getDistance(DistanceUnit.CM) > range){
+                while ((frange.getDistance(DistanceUnit.CM) > range)) {
+                    leftMotor.setPower(-speed);
+                    rightMotor.setPower(-speed);
+                }
+            } else if (frange.getDistance(DistanceUnit.CM) <= range){
+                leftMotor.setPower(0);
+                rightMotor.setPower(0);
+            }
+        } else if (!opModeIsActive){
+            leftMotor.setPower(0);
+            rightMotor.setPower(0);
+        }
+
+    }
+
     public static void encoderSlow(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
