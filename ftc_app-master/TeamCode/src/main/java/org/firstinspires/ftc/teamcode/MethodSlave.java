@@ -183,7 +183,7 @@ public class MethodSlave {
     }
 
     public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor,GyroSensor gyro,
-                                   boolean opModeIsActive) {
+                                boolean opModeIsActive) {
         if (isLeft) {
 
             while ( opModeIsActive && (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2)) {
@@ -230,7 +230,7 @@ public class MethodSlave {
     }
 
     public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
-                                 boolean opModeIsActive) {
+                                  boolean opModeIsActive) {
 
         while (opModeIsActive && (gyro.getHeading() < angle || gyro.getHeading() == 0)) {
             if (opModeIsActive) {
@@ -329,15 +329,15 @@ public class MethodSlave {
             leftMotor.setPower(0);
             rightMotor.setPower(0);
         } /* else {
-            while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
-                leftMotor.setPower(speed);
-                rightMotor.setPower(-speed);
-            }
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
-        }
+           while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
+               leftMotor.setPower(speed);
+               rightMotor.setPower(-speed);
+           }
+           leftMotor.setPower(0);
+           rightMotor.setPower(0);
+       }
 
-    }
+   }
 */}
     public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
@@ -378,7 +378,7 @@ public class MethodSlave {
     public static void beaconCheckOut(Servo buttonPresser) {
         //checks color sensor value and presses beacon
 
-            buttonPresser.setPosition(0);
+        buttonPresser.setPosition(0);
 
     }
 
@@ -389,3 +389,4 @@ public class MethodSlave {
 
     }
 }
+

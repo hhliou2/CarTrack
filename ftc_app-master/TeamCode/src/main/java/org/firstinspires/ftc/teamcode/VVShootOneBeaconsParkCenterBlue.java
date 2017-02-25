@@ -127,3 +127,4 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         encoderForward(-59, -1.0, leftMotor, rightMotor, opModeIsActive());
     }
 }
+
