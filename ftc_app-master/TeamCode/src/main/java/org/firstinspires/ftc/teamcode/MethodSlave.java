@@ -363,7 +363,7 @@ public class MethodSlave {
                         rightMotor.setPower(speed);
                     }
                 }else if(eopd.getLightDetected() > intensity){
-                    break;
+                    return;
                 }
 
             }
