@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -14,6 +15,8 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -41,6 +44,8 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
     GyroSensor gyro;
 
+    ModernRoboticsI2cRangeSensor rangeFront;
+
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes co    mponents to names on phone
@@ -60,18 +65,23 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
         gyro = hardwareMap.gyroSensor.get("gyro");
 
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class,"frange");
+
         //close the floodgate
-        floodgate.setPosition(1);
-        buttonPresser.setPosition(0);
+        floodgate.setPosition(0.8);
+        buttonPresser.setPosition(1);
         //waits for user to press start
         waitForStart();
 
-        encoderForward(4.4, 1.0, leftMotor, rightMotor,opModeIsActive());
+        gyro.calibrate();
+        encoderForward(-2, -1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        gyroTurn(24.736, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(-125.3994, -1.0, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(28.0835, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        encoderForward(-26, -1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardRight(10, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(55, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-10, -1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(10, 1.0, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.15, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
@@ -80,7 +90,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red() && opModeIsActive());
 
-        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.15, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);

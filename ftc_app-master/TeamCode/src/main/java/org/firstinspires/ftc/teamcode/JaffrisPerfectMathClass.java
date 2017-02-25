@@ -1,27 +1,22 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
-import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 
 /**
- * Created by Hasan on 12/1/2016.
+ * Created by Jaffri on 2/21/2017.
  */
+@Autonomous (name="Ugh I suck at code", group="Cri")
+public class JaffrisPerfectMathClass extends LinearOpMode {
 
-//sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Corner Shoot Two Park Red", group="Park Corner")
-public class VVShootTwoParkCornerRed extends LinearOpMode {
-
-    //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
     DcMotor rightMotor;
     DcMotor loader;
@@ -55,21 +50,16 @@ public class VVShootTwoParkCornerRed extends LinearOpMode {
 
         touch = hardwareMap.touchSensor.get("touch");
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
+
         //close the floodgate
         floodgate.setPosition(1);
 
-        gyro = hardwareMap.gyroSensor.get("gyro");
+        buttonPresser.setPosition(0);
 
         //waits for user to press start
         waitForStart();
 
-        sleep(10000);
-        encoderForward(13.65, 1.0, leftMotor, rightMotor, opModeIsActive());
-        shootTwo(floodgate, launcher, opModeIsActive());
-        gyroTurn(6.3888888, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(88.6037, 1.0, leftMotor, rightMotor, opModeIsActive());
-
+        encoderForward(10, 0.25, leftMotor, rightMotor, opModeIsActive());
+        }
     }
-
-
-}

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -33,6 +34,7 @@ public class VVShootOneBeaconsParkCornerBlue extends LinearOpMode {
 
     TouchSensor touch;
 
+    ModernRoboticsI2cRangeSensor rangeFront;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -50,6 +52,8 @@ public class VVShootOneBeaconsParkCornerBlue extends LinearOpMode {
         eopd = hardwareMap.opticalDistanceSensor.get("eopd");
 
         touch = hardwareMap.touchSensor.get("touch");
+
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
 
         //close the floodgate
         floodgate.setPosition(1);

@@ -10,20 +10,23 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
-import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 
 /**
  * Created by Hasan on 12/1/2016.
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Center Shoot Two Beacons Park Red", group="Beacon")
-public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
+@Autonomous(name="Bacon Test", group="Test")
+public class BeaconTest extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -42,7 +45,7 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
 
     GyroSensor gyro;
 
-    ModernRoboticsI2cRangeSensor rangeFront;
+    ModernRoboticsI2cRangeSensor frange;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -62,37 +65,66 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
         touch = hardwareMap.touchSensor.get("touch");
 
         gyro = hardwareMap.gyroSensor.get("gyro");
-
-        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
-
         //close the floodgate
         floodgate.setPosition(1);
         buttonPresser.setPosition(1);
+
+        gyro.calibrate();
+
+        frange = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
         //waits for user to press start
         waitForStart();
 
-        encoderForward(8, 1.0, leftMotor, rightMotor,opModeIsActive());
-        shootTwo(floodgate, launcher, opModeIsActive());
-        gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(4.926, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
-        do {
+        telemetry.addData("Front Sensor: ", frange.getDistance(DistanceUnit.CM));
+
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
+
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(200);
+
+        if (color.blue() < color.red()) {
+            sleep(4400);
+        }
+
+        while (color.blue() < color.red() && opModeIsActive()) {
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-        } while (color.blue() < color.red());
+            if(!opModeIsActive()){
+                break;
+            }
+        }
 
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.20, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
 
-        do {
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(200);
+
+        if (color.blue() < color.red()) {
+            sleep(4400);
+        }
+
+        while (color.blue() < color.red() && opModeIsActive()) {
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-        } while (color.blue() > color.red());
+        }
     }
 
 
 }
+
+/*
+* I like big butts and Abe Lincoln cannot tell lies
+* -jaffli
+ */

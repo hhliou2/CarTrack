@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -14,7 +15,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
+import static org.firstinspires.ftc.teamcode.MethodSlave.swingLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.swingRight;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -23,6 +27,9 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 //sets program name and group on phone, and groups are in alphabetic order
 @Autonomous(name="Center Shoot Two Beacons Park Blue", group="Beacon")
 public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
+
+    //sets the shooting distance, can be a simple fix after consistency testing
+    private double SHOOTING_DISTANCE = 7;
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -40,6 +47,8 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
     TouchSensor touch;
 
     GyroSensor gyro;
+
+    ModernRoboticsI2cRangeSensor rangeFront;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -60,19 +69,24 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
 
         gyro = hardwareMap.gyroSensor.get("gyro");
 
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
+
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(0);
+        buttonPresser.setPosition(1);
         //waits for user to press start
 
         waitForStart();
 
-        encoderForward(8, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(2, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        gyroTurn(24.736, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(-125.39941, -1.0, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(28.0835, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        encoderForward(26, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(10.524335, 0.3, leftMotor, rightMotor, opModeIsActive());
+
+        //we run into the wall to create the constant
+        encoderForward(65, -1.0, leftMotor, rightMotor, opModeIsActive());
+        swingRight(92, 0.25, leftMotor, rightMotor, gyro, opModeIsActive());
+        lineApproach(0.15, 0.15, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -80,7 +94,7 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.15, -0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.15, 0.15, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
@@ -88,7 +102,12 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
             beaconCheckIn(buttonPresser);
             sleep(700);
         } while (color.blue() < color.red());
+
+        //turn toward cap ball and bump
+        swingLeft(130, 0.3,leftMotor, rightMotor, gyro, opModeIsActive());
+        encoderForward(80.823374593, 1.0, leftMotor, rightMotor, opModeIsActive());
+        }
     }
 
 
-}
+

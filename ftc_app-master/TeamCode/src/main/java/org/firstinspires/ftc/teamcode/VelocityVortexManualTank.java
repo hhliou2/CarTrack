@@ -50,8 +50,8 @@ public class VelocityVortexManualTank extends OpMode {
 
         gyro = hardwareMap.gyroSensor.get("gyro");
         isBackWheelDrive = false;
-        floodgate.setPosition(1);
-        buttonPresser.setPosition(0);
+        floodgate.setPosition(0.9);
+        buttonPresser.setPosition(1);
     }
 
     @Override
@@ -88,11 +88,11 @@ public class VelocityVortexManualTank extends OpMode {
             }
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
-                buttonPresser.setPosition(1);
+                buttonPresser.setPosition(0);
             } else if (gamepad2.left_bumper || gamepad1.left_bumper){
-                buttonPresser.setPosition(0);
+                buttonPresser.setPosition(1);
             } else {
-                buttonPresser.setPosition(0);
+                buttonPresser.setPosition(1);
             }
             if (gamepad2.dpad_up) {
 
@@ -141,18 +141,18 @@ public class VelocityVortexManualTank extends OpMode {
             }
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
-                buttonPresser.setPosition(1);
+                buttonPresser.setPosition(0);
             }
             else if (gamepad2.left_bumper || gamepad1.left_bumper) {
                 buttonPresser.setPosition(0);
             } else {
-                buttonPresser.setPosition(0);
+                buttonPresser.setPosition(1);
             }
 
             if (gamepad2.dpad_up) {
                 floodgate.setPosition(0);
             } else {
-                floodgate.setPosition(1);
+                floodgate.setPosition(0.9);
             }
 
             if (gamepad1.x) {

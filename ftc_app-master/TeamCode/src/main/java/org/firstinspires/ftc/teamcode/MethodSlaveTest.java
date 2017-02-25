@@ -64,11 +64,16 @@ public class MethodSlaveTest extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        gyroTurn(90, 0.25, true, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(77, 0.2, true, leftMotor, rightMotor, gyro, opModeIsActive());
         gyro.calibrate();
         sleep(3000);
-        gyroTurn(90, 0.25, false, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(77, 0.2, false, leftMotor, rightMotor, gyro, opModeIsActive());
     }
 
 
 }
+
+/*
+* I like big butts and Abe Lincoln cannot tell lies
+* -jaffli
+ */

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -41,6 +42,8 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
 
     GyroSensor gyro;
 
+    ModernRoboticsI2cRangeSensor rangeFront;
+
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
@@ -60,6 +63,8 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
 
         gyro = hardwareMap.gyroSensor.get("gyro");
 
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
+
         //close the floodgate
         floodgate.setPosition(1);
         buttonPresser.setPosition(0);
@@ -71,7 +76,7 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
         gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
         gyroTurn(4.926, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -79,7 +84,7 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, opModeIsActive());
+        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
