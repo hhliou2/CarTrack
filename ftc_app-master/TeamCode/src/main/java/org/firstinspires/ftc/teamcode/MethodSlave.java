@@ -306,7 +306,7 @@ public class MethodSlave {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        if(isWhiteLine) {
+//        if(isWhiteLine) {
             while (opModeIsActive && (eopd.getLightDetected() < intensity)) {
                 frange.getDistance(DistanceUnit.CM);
                 if(frange.getDistance(DistanceUnit.CM)<9){
@@ -329,7 +329,7 @@ public class MethodSlave {
 
             leftMotor.setPower(0);
             rightMotor.setPower(0);
-        } else {
+        } /* else {
             while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
                 leftMotor.setPower(speed);
                 rightMotor.setPower(-speed);
@@ -339,7 +339,7 @@ public class MethodSlave {
         }
 
     }
-
+*/
     public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
