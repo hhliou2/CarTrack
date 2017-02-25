@@ -78,10 +78,9 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
 
         waitForStart();
 
-
-        encoderForward(SHOOTING_DISTANCE, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(2, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderForward(28 - SHOOTING_DISTANCE, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(26, 1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardLeft(10.524335, 0.3, leftMotor, rightMotor, opModeIsActive());
 
         //we run into the wall to create the constant
