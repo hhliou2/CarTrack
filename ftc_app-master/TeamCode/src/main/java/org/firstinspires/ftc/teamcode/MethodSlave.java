@@ -311,11 +311,11 @@ public class MethodSlave {
                 if (eopd.getLightDetected() < intensity) {
                     frange.getDistance(DistanceUnit.CM);
                     if (frange.getDistance(DistanceUnit.CM) < 9) {
-                        leftMotor.setPower(-speed / 2);
+                        leftMotor.setPower(-speed / 3);
                         rightMotor.setPower(speed);
                     } else if (frange.getDistance(DistanceUnit.CM) > 9) {
                         leftMotor.setPower(-speed);
-                        rightMotor.setPower(speed / 2);
+                        rightMotor.setPower(speed / 3);
                     } else {
                         leftMotor.setPower(-speed);
                         rightMotor.setPower(speed);

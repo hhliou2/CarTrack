@@ -76,10 +76,10 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         gyro.calibrate();
         encoderForward(-2, -1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(-29, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-30, -1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardRight(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(48, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardLeft(9.4, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(50, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(8.8, 1.0, leftMotor, rightMotor, opModeIsActive());
         lineApproach(0.25, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
