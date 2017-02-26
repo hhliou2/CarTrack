@@ -10,11 +10,14 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import static org.firstinspires.ftc.teamcode.MethodSlave.BackApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -67,31 +70,60 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(0);
+        buttonPresser.setPosition(1);
         //waits for user to press start
         waitForStart();
 
-        encoderForward(4.4, 1.0, leftMotor, rightMotor,opModeIsActive());
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        encoderForward(-2, -1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(4.926, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
-        do {
+        encoderForward(-28, -1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(15, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(65.7, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(31, 1.0, leftMotor, rightMotor, opModeIsActive());
+        leftMotor.setPower(-0.2);
+        rightMotor.setPower(0.2);
+        sleep(50);
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(700);
+
+        if(color.blue() > color.red()){
+            sleep(4400);
+        }
+
+        while(color.blue() > color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-        } while (color.blue() < color.red());
+        }
 
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
-        do {
+        beaconCheckOut(buttonPresser);
+        sleep(700);
+        beaconCheckIn(buttonPresser);
+        sleep(700);
+
+        if(color.blue() > color.red()){
+            sleep(4400);
+        }
+
+        while(color.blue() > color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-        } while (color.blue() > color.red());
+        }
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        encoderForward(-28, -1.0, leftMotor, rightMotor,opModeIsActive());
     }
 
 

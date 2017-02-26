@@ -375,6 +375,7 @@ public class MethodSlave {
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+
     public static void lineApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -414,6 +415,36 @@ public class MethodSlave {
 
    }
 */}
+    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+                                    OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if(isWhiteLine) {
+            while (opModeIsActive) {
+                if (eopd.getLightDetected() < intensity) {
+                    frange.getDistance(DistanceUnit.CM);
+                    if (frange.getDistance(DistanceUnit.CM) < 11) {
+                        leftMotor.setPower(-speed / 2.5);
+                        rightMotor.setPower(speed);
+
+                    } else if (frange.getDistance(DistanceUnit.CM) > 11) {
+                        leftMotor.setPower(-speed);
+                        rightMotor.setPower(speed / 2.5);
+
+                    } else {
+                        leftMotor.setPower(-speed);
+                        rightMotor.setPower(speed);
+                    }
+                }else if(eopd.getLightDetected() > intensity) {
+                    break;
+                }
+            }
+
+            leftMotor.setPower(0);
+            rightMotor.setPower(0);
+        }
+    }
     public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
