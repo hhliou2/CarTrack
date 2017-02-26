@@ -19,6 +19,7 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.rangeRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
+import static org.firstinspires.ftc.teamcode.MethodSlave.wallAlign;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -80,8 +81,8 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         shootOne(floodgate, launcher, opModeIsActive());
         encoderForward(-30, -1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardRight(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(46, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardLeft(9, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(46.5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(9.7, 1.0, leftMotor, rightMotor, opModeIsActive());
         lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         beaconCheckOut(buttonPresser);

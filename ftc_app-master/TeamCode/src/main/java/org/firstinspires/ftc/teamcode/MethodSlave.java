@@ -343,6 +343,38 @@ public class MethodSlave {
         //end of cycle
     }
 
+    public static void wallAlign(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor,
+                                 ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        double rotations = distance / CIRCUMFERENCE;
+        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
+
+        //start encoder run cycle, turns to next beacon
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftMotor.setTargetPosition((int) counts);
+        rightMotor.setTargetPosition((int) -counts);
+
+        leftMotor.setPower(speed*0.8);
+        rightMotor.setPower(-speed);
+
+        while (opModeIsActive) {
+            if (frange.getDistance(DistanceUnit.CM) > 13) {
+                leftMotor.setPower(-speed);
+                rightMotor.setPower(speed / 2.5);
+            } else if (frange.getDistance(DistanceUnit.CM) < 9) {
+                leftMotor.setPower(-speed / 2.5);
+                rightMotor.setPower(speed);
+            }
+        }
+
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
     public static void lineApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -352,20 +384,21 @@ public class MethodSlave {
             while (opModeIsActive) {
                 if (eopd.getLightDetected() < intensity) {
                     frange.getDistance(DistanceUnit.CM);
-                    if (frange.getDistance(DistanceUnit.CM) < 9) {
+                    if (frange.getDistance(DistanceUnit.CM) < 11) {
                         leftMotor.setPower(-speed / 2.5);
                         rightMotor.setPower(speed);
-                    } else if (frange.getDistance(DistanceUnit.CM) > 9) {
+
+                    } else if (frange.getDistance(DistanceUnit.CM) > 11) {
                         leftMotor.setPower(-speed);
                         rightMotor.setPower(speed / 2.5);
+
                     } else {
                         leftMotor.setPower(-speed);
                         rightMotor.setPower(speed);
                     }
-                }else if(eopd.getLightDetected() > intensity){
-                    return;
+                }else if(eopd.getLightDetected() > intensity) {
+                    break;
                 }
-
             }
 
             leftMotor.setPower(0);
