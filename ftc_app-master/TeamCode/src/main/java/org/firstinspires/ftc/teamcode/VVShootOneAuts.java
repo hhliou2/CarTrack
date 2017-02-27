@@ -60,7 +60,7 @@ public class VVShootOneAuts extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        sleep(7000);
+        sleep(15000);
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoderForward(-10, -1.0, leftMotor, rightMotor, opModeIsActive());

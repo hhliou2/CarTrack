@@ -76,7 +76,7 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
         gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
         encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
         gyroTurn(4.926, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.25, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.5, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -84,7 +84,7 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.15, 0.5, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.15, 0.5, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);

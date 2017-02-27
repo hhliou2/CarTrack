@@ -81,9 +81,9 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         shootOne(floodgate, launcher, opModeIsActive());
         encoderForward(-30, -1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardRight(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(46.5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(48, 1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardLeft(9.7, 1.0, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, 13, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);
@@ -104,7 +104,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             }
         }
 
-        lineApproach(0.25, 0.25, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.25, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);

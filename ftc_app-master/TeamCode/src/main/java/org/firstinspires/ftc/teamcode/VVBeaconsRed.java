@@ -10,23 +10,20 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import static org.firstinspires.ftc.teamcode.MethodSlave.BackApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
-import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
- * Created by Hasan on 12/1/2016.
+ * Created by Fluff on 2/26/2017.
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Center Shoot One Beacons Park Red", group="Beacon")
-public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
+@Autonomous(name="Beacons Park Red", group="Beacon")
+public class VVBeaconsRed extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;

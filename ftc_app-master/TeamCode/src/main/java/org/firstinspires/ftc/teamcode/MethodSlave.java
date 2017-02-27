@@ -376,20 +376,22 @@ public class MethodSlave {
     }
 
 
-    public static void lineApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+    public static void lineApproach(double intensity, double speed, double range, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
 
         if(isWhiteLine) {
             while (opModeIsActive) {
                 if (eopd.getLightDetected() < intensity) {
                     frange.getDistance(DistanceUnit.CM);
-                    if (frange.getDistance(DistanceUnit.CM) < 11) {
+                    if (frange.getDistance(DistanceUnit.CM) < range) {
                         leftMotor.setPower(-speed / 2.5);
                         rightMotor.setPower(speed);
 
-                    } else if (frange.getDistance(DistanceUnit.CM) > 11) {
+                    } else if (frange.getDistance(DistanceUnit.CM) > range) {
                         leftMotor.setPower(-speed);
                         rightMotor.setPower(speed / 2.5);
 

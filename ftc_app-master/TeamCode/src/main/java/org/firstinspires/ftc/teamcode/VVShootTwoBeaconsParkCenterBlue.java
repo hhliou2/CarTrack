@@ -86,7 +86,7 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
         //we run into the wall to create the constant
         encoderForward(65, -1.0, leftMotor, rightMotor, opModeIsActive());
         swingRight(92, 0.25, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.15, 0.15, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.15, 0.15, 13, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -94,7 +94,7 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.15, 0.15, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.15, 0.15, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
