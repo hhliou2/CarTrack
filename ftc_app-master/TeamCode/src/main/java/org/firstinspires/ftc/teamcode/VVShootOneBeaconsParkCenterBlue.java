@@ -77,57 +77,59 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(-2, -1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(2, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(-30, -1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardRight(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(48, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardLeft(9.7, 1.0, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.2, 13, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
-
-        beaconCheckOut(buttonPresser);
-        sleep(700);
-        beaconCheckIn(buttonPresser);
+        encoderForward(30, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(9.7, 0.5, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-45, -1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardRight(8.0, 0.5, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
         sleep(500);
 
-        if (color.blue() < color.red()) {
-            sleep(4400);
-        }
-
-        while (color.blue() < color.red() && opModeIsActive()) {
+        if (color.blue() > color.red()) {
+            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            encoderForward(-5, 1.0, leftMotor, rightMotor, opModeIsActive());
+            sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            if(!opModeIsActive()){
-                break;
-            }
+            encoderForward(8, 0.5, leftMotor, rightMotor, opModeIsActive());
+        }else if(color.blue() < color.red()){
+            beaconCheckOut(buttonPresser);
+            sleep(700);
+            beaconCheckIn(buttonPresser);
+            sleep(700);
+            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
         }
 
         lineApproach(0.25, 0.25, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
-        beaconCheckOut(buttonPresser);
-        sleep(700);
-        beaconCheckIn(buttonPresser);
-        sleep(1000);
-
-        if (color.blue() < color.red()) {
-            sleep(4100);
-        }
-
-        while (color.blue() < color.red() && opModeIsActive()) {
+        if (color.blue() > color.red()) {
+            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            encoderForward(-5, 1.0, leftMotor, rightMotor, opModeIsActive());
+            sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            if(!opModeIsActive()){
-                break;
-            }
+            encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        }else if(color.blue() < color.red()){
+            sleep(1000);
+            buttonPresser.setPosition(0);
+            sleep(700);
+            buttonPresser.setPosition(1);
+            sleep(700);
         }
+
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        realEncoderForwardRight(15, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-47, -1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(15, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(47, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 }
 

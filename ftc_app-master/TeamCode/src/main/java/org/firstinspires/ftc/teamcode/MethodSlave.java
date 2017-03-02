@@ -18,8 +18,7 @@ import static java.lang.Thread.sleep;
 public class MethodSlave {
 
     //sets several constants
-//    private final static int ENCODER_CPR = 1120;
-    private final static int ENCODER_CPR = 1440;
+    private final static int ENCODER_CPR = 1120;
     private final static double GEAR_RATIO = 1;
     private final static int WHEEL_DIAMETER = 3;
 
@@ -388,16 +387,16 @@ public class MethodSlave {
                 if (eopd.getLightDetected() < intensity) {
                     frange.getDistance(DistanceUnit.CM);
                     if (frange.getDistance(DistanceUnit.CM) < range) {
-                        leftMotor.setPower(-speed / 2.5);
-                        rightMotor.setPower(speed);
+                        leftMotor.setPower(speed * 0.3);
+                        rightMotor.setPower(-speed);
 
                     } else if (frange.getDistance(DistanceUnit.CM) > range) {
-                        leftMotor.setPower(-speed);
-                        rightMotor.setPower(speed / 2.5);
+                        leftMotor.setPower(speed);
+                        rightMotor.setPower(-speed * 0.3);
 
                     } else {
-                        leftMotor.setPower(-speed);
-                        rightMotor.setPower(speed);
+                        leftMotor.setPower(speed);
+                        rightMotor.setPower(-speed);
                     }
                 }else if(eopd.getLightDetected() > intensity) {
                     break;
