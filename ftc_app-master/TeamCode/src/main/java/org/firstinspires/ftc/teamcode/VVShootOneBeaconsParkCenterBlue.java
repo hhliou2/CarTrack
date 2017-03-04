@@ -89,7 +89,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         if (color.blue() > color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5, 1.0, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -111,7 +111,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
         if (color.blue() > color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5, 1.0, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -119,7 +119,6 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
             encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
         }else if(color.blue() < color.red()){
-            sleep(1000);
             buttonPresser.setPosition(0);
             sleep(700);
             buttonPresser.setPosition(1);

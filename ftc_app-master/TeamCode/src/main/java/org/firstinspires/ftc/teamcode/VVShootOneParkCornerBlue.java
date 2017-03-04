@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 
@@ -67,10 +68,10 @@ public class VVShootOneParkCornerBlue extends LinearOpMode {
         sleep(10000);
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(-12, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(12, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        realEncoderForwardLeft(5, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-64, -1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardRight(3.5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(64, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 
 }
