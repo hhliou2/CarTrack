@@ -76,10 +76,11 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoderForward(3, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
+        encoderForward(15, 1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardLeft(15, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-52, -1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(-60, -1.0, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardRight(14, 1.0, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, 12, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         if (color.blue() > color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -90,7 +91,7 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            encoderForward(-36, -1.0, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, -1.0, leftMotor, rightMotor, opModeIsActive());
         }else if(color.blue() < color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -98,11 +99,10 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
             sleep(700);
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-40, -1.0, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, -1.0, leftMotor, rightMotor, opModeIsActive());
         }
 
-        lineApproach(0.25, -0.25, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
-        encoderForward(1.5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.25, -0.2, 12, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         if (color.blue() > color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
