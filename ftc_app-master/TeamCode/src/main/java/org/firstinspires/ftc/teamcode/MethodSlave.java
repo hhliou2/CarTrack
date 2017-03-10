@@ -26,7 +26,8 @@ public class MethodSlave {
     private final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
 
     //sets several constants
-    private final static int ENCODER_CPR_NEVEREST60 = 1680;
+    // changed to neverest 40 encoder values but kept as ENCODER_CPR_NEVEREST60 for convenience of coding
+    private final static int ENCODER_CPR_NEVEREST60 = 1120;
     private final static double GEAR_RATIO_NEVEREST60 = 4;
     private final static int ROTATIONS_NEVEREST60 = 1;
 
