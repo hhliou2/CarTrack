@@ -290,6 +290,7 @@ public class MethodSlave {
     public static void shootOne(Servo floodgate, DcMotor launcher, boolean opModeIsActive) {
         floodgate.setPosition(1);
         //start encoder run cycle, turns to next beacon
+        launcher.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         launcher.setTargetPosition((int) -COUNTS_NEVEREST60);
@@ -307,8 +308,10 @@ public class MethodSlave {
         floodgate.setPosition(1);
     }
 
-    public static void shootTwo (Servo floodgate, DcMotor launcher, boolean opModeIsActive) throws InterruptedException {
+    public static void shootTwo (Servo floodgate, DcMotor launcher, boolean opModeIsActive)  throws InterruptedException{
+        floodgate.setPosition(1);
         //start encoder run cycle, turns to next beacon
+        launcher.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         launcher.setTargetPosition((int) -COUNTS_NEVEREST60);

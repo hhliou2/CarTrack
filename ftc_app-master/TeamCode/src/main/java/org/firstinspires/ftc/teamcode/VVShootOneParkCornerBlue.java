@@ -65,12 +65,13 @@ public class VVShootOneParkCornerBlue extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        sleep(10000);
+
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sleep(10000);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoderForward(12, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        realEncoderForwardRight(3.5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardRight(4.8, 1.0, leftMotor, rightMotor, opModeIsActive());
         encoderForward(67, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 

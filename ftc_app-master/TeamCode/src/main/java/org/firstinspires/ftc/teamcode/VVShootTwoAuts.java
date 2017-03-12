@@ -56,6 +56,7 @@ public class VVShootTwoAuts extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(1);
+        buttonPresser.setPosition(1);
 
         //waits for user to press start
         waitForStart();
