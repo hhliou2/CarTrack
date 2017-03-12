@@ -19,12 +19,12 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
- * Created by Fluff on 2/26/2017.
+ * Created by Jaffri on 3/11/2017.
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Center Shoot One Blue YOGA", group="Beacon")
-public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
+@Autonomous(name="Center Shoot One Beacons Park Red YOGA", group="Beacon")
+public class VVShootOneBeaconsParkCenterRedYOGA extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -64,37 +64,37 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
 
         gyro = hardwareMap.gyroSensor.get("gyro");
 
-        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class,"frange");
+        rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "frange");
 
         //close the floodgate
-        floodgate.setPosition(0.8);
+        floodgate.setPosition(1);
         buttonPresser.setPosition(1);
         //waits for user to press start
         waitForStart();
 
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(3, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(2, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
         encoderForward(15, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardRight(4.5, 0.6, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(4.5, 1.0, leftMotor, rightMotor, opModeIsActive());
         encoderForward(72, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardRight(5.5, 0.6, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(26, 0.3, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(5.5, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(26, 0.4, leftMotor, rightMotor, opModeIsActive());
         realEncoderForwardLeft(10, 1.0, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.2, 12, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
-        if (color.blue() > color.red()) {
+        if (color.blue() < color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, -0.5, leftMotor, rightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
             encoderForward(-55, -1.0, leftMotor, rightMotor, opModeIsActive());
-        }else if(color.blue() < color.red()){
+        }else if(color.blue() > color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
@@ -104,19 +104,19 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
             encoderForward(-55, -1.0, leftMotor, rightMotor, opModeIsActive());
         }
 
-        lineApproach(0.25, -0.2, 12, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
-        if (color.blue() > color.red()) {
+        if (color.blue() < color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, -0.5, leftMotor, rightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
             encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
-        }else if(color.blue() < color.red()){
+        }else if(color.blue() > color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
@@ -124,11 +124,12 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
-
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        realEncoderForwardLeft(19, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(17, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(6, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(65, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
+
+
 }
 
