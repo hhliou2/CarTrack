@@ -4,21 +4,26 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.encoderSlow;
+import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
+import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
+
 
 /**
- * Created by Hasan on 12/1/2016.
+ * Created by Fluff on 2/26/2017.
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Shoot One Auts", group="Auts")
-public class VVShootOneAuts extends LinearOpMode {
+@Autonomous(name="Corner Shoot One Park Red", group="Park Corner")
+public class VVShootOneParkCornerRed extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -35,6 +40,7 @@ public class VVShootOneAuts extends LinearOpMode {
 
     TouchSensor touch;
 
+    GyroSensor gyro;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -53,6 +59,8 @@ public class VVShootOneAuts extends LinearOpMode {
 
         touch = hardwareMap.touchSensor.get("touch");
 
+        gyro = hardwareMap.gyroSensor.get("gyro");
+
         //close the floodgate
         floodgate.setPosition(1);
         buttonPresser.setPosition(1);
@@ -60,12 +68,14 @@ public class VVShootOneAuts extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        sleep(15000);
+
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sleep(10000);
         encoderForward(12, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(52, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(4.8, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(67, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 
 

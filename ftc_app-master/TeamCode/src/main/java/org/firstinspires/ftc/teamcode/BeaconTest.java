@@ -81,7 +81,7 @@ public class BeaconTest extends LinearOpMode {
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
-        lineApproach(0.25, 0.2, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);
@@ -102,7 +102,7 @@ public class BeaconTest extends LinearOpMode {
             }
         }
 
-        lineApproach(0.25, 0.20, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
+        lineApproach(0.25, 0.20, 11, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);

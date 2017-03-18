@@ -18,8 +18,7 @@ import static java.lang.Thread.sleep;
 public class MethodSlave {
 
     //sets several constants
-//    private final static int ENCODER_CPR = 1120;
-    private final static int ENCODER_CPR = 1440;
+    private final static int ENCODER_CPR = 1120;
     private final static double GEAR_RATIO = 1;
     private final static int WHEEL_DIAMETER = 3;
 
@@ -27,12 +26,55 @@ public class MethodSlave {
     private final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
 
     //sets several constants
-    private final static int ENCODER_CPR_NEVEREST60 = 1680;
+    // changed to neverest 40 encoder values but kept as ENCODER_CPR_NEVEREST60 for convenience of coding
+    private final static int ENCODER_CPR_NEVEREST60 = 1120;
     private final static double GEAR_RATIO_NEVEREST60 = 4;
     private final static int ROTATIONS_NEVEREST60 = 1;
 
     //sets value to be sent to encoder
     private final static double COUNTS_NEVEREST60 = ENCODER_CPR_NEVEREST60 * ROTATIONS_NEVEREST60 * GEAR_RATIO_NEVEREST60;
+
+    public static void rangeLeft(double range, double speed, DcMotor leftMotor, DcMotor rightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if(opModeIsActive){
+            if(frange.getDistance(DistanceUnit.CM) > range){
+                while ((frange.getDistance(DistanceUnit.CM) > range)) {
+                    leftMotor.setPower(speed);
+                    rightMotor.setPower(speed);
+                }
+            } else if (frange.getDistance(DistanceUnit.CM) <= range){
+                leftMotor.setPower(0);
+                rightMotor.setPower(0);
+            }
+        } else if (!opModeIsActive){
+            leftMotor.setPower(0);
+            rightMotor.setPower(0);
+        }
+
+    }
+
+    public static void rangeRight(double range, double speed, DcMotor leftMotor, DcMotor rightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if(opModeIsActive){
+            if(frange.getDistance(DistanceUnit.CM) > range){
+                while ((frange.getDistance(DistanceUnit.CM) > range)) {
+                    leftMotor.setPower(-speed);
+                    rightMotor.setPower(-speed);
+                }
+            } else if (frange.getDistance(DistanceUnit.CM) <= range){
+                leftMotor.setPower(0);
+                rightMotor.setPower(0);
+            }
+        } else if (!opModeIsActive){
+            leftMotor.setPower(0);
+            rightMotor.setPower(0);
+        }
+
+    }
 
     public static void encoderSlow(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
@@ -183,7 +225,7 @@ public class MethodSlave {
     }
 
     public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor,GyroSensor gyro,
-                                   boolean opModeIsActive) {
+                                boolean opModeIsActive) {
         if (isLeft) {
 
             while ( opModeIsActive && (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2)) {
@@ -230,7 +272,7 @@ public class MethodSlave {
     }
 
     public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
-                                 boolean opModeIsActive) {
+                                  boolean opModeIsActive) {
 
         while (opModeIsActive && (gyro.getHeading() < angle || gyro.getHeading() == 0)) {
             if (opModeIsActive) {
@@ -248,6 +290,7 @@ public class MethodSlave {
     public static void shootOne(Servo floodgate, DcMotor launcher, boolean opModeIsActive) {
         floodgate.setPosition(1);
         //start encoder run cycle, turns to next beacon
+        launcher.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         launcher.setTargetPosition((int) -COUNTS_NEVEREST60);
@@ -265,8 +308,10 @@ public class MethodSlave {
         floodgate.setPosition(1);
     }
 
-    public static void shootTwo (Servo floodgate, DcMotor launcher, boolean opModeIsActive) throws InterruptedException {
+    public static void shootTwo (Servo floodgate, DcMotor launcher, boolean opModeIsActive)  throws InterruptedException{
+        floodgate.setPosition(1);
         //start encoder run cycle, turns to next beacon
+        launcher.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launcher.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         launcher.setTargetPosition((int) -COUNTS_NEVEREST60);
@@ -301,45 +346,110 @@ public class MethodSlave {
         //end of cycle
     }
 
-    public static void lineApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+    public static void wallAlign(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor,
+                                 ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        double rotations = distance / CIRCUMFERENCE;
+        double counts = ENCODER_CPR * rotations * GEAR_RATIO;
+
+        //start encoder run cycle, turns to next beacon
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftMotor.setTargetPosition((int) counts);
+        rightMotor.setTargetPosition((int) -counts);
+
+        leftMotor.setPower(speed*0.8);
+        rightMotor.setPower(-speed);
+
+        while (opModeIsActive) {
+            if (frange.getDistance(DistanceUnit.CM) > 13) {
+                leftMotor.setPower(-speed);
+                rightMotor.setPower(speed / 2.5);
+            } else if (frange.getDistance(DistanceUnit.CM) < 9) {
+                leftMotor.setPower(-speed / 2.5);
+                rightMotor.setPower(speed);
+            }
+        }
+
+        leftMotor.setPower(0);
+        rightMotor.setPower(0);
+
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+
+    public static void lineApproach(double intensity, double speed, double range, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-//        if(isWhiteLine) {
-            while (opModeIsActive && (eopd.getLightDetected() < intensity)) {
-                frange.getDistance(DistanceUnit.CM);
-                if(frange.getDistance(DistanceUnit.CM)<9){
-                    leftMotor.setPower(-speed/2);
-                    rightMotor.setPower(speed);
-                }
-                else if(frange.getDistance(DistanceUnit.CM)>9){
-                    leftMotor.setPower(-speed);
-                    rightMotor.setPower(speed/2);
-                }
-                else{
-                    leftMotor.setPower(-speed);
-                    rightMotor.setPower(speed);
-                }
 
-                if(!opModeIsActive) {
-                    return;
+
+        if(isWhiteLine) {
+            while (opModeIsActive) {
+                if (eopd.getLightDetected() < intensity) {
+                    frange.getDistance(DistanceUnit.CM);
+                    if (frange.getDistance(DistanceUnit.CM) < range) {
+                        leftMotor.setPower(speed * 0.3);
+                        rightMotor.setPower(-speed);
+
+                    } else if (frange.getDistance(DistanceUnit.CM) > range) {
+                        leftMotor.setPower(speed);
+                        rightMotor.setPower(-speed * 0.3);
+
+                    } else {
+                        leftMotor.setPower(speed);
+                        rightMotor.setPower(-speed);
+                    }
+                }else if(eopd.getLightDetected() > intensity) {
+                    break;
                 }
             }
 
             leftMotor.setPower(0);
             rightMotor.setPower(0);
         } /* else {
-            while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
-                leftMotor.setPower(speed);
-                rightMotor.setPower(-speed);
+           while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
+               leftMotor.setPower(speed);
+               rightMotor.setPower(-speed);
+           }
+           leftMotor.setPower(0);
+           rightMotor.setPower(0);
+       }
+
+   }
+*/}
+    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+                                    OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        if(isWhiteLine) {
+            while (opModeIsActive) {
+                if (eopd.getLightDetected() < intensity) {
+                    frange.getDistance(DistanceUnit.CM);
+                    if (frange.getDistance(DistanceUnit.CM) < 11) {
+                        leftMotor.setPower(-speed / 2.5);
+                        rightMotor.setPower(speed);
+
+                    } else if (frange.getDistance(DistanceUnit.CM) > 11) {
+                        leftMotor.setPower(-speed);
+                        rightMotor.setPower(speed / 2.5);
+
+                    } else {
+                        leftMotor.setPower(-speed);
+                        rightMotor.setPower(speed);
+                    }
+                }else if(eopd.getLightDetected() > intensity) {
+                    break;
+                }
             }
+
             leftMotor.setPower(0);
             rightMotor.setPower(0);
         }
-
     }
-*/
     public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -379,7 +489,7 @@ public class MethodSlave {
     public static void beaconCheckOut(Servo buttonPresser) {
         //checks color sensor value and presses beacon
 
-            buttonPresser.setPosition(0);
+        buttonPresser.setPosition(0);
 
     }
 
@@ -390,3 +500,4 @@ public class MethodSlave {
 
     }
 }
+

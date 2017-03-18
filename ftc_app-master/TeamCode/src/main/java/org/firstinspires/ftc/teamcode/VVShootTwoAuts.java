@@ -56,14 +56,17 @@ public class VVShootTwoAuts extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(1);
+        buttonPresser.setPosition(1);
 
         //waits for user to press start
         waitForStart();
 
-        sleep(5000);
-        encoderForward(21, 1.0, leftMotor, rightMotor, opModeIsActive());
+        sleep(15000);
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        encoderForward(12, 1.0, leftMotor, rightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderForward(45, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(52, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 
 

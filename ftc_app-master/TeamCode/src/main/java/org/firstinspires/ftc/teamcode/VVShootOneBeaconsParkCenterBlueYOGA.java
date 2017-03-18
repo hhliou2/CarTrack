@@ -13,21 +13,18 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
-import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.lineApproach;
-import static org.firstinspires.ftc.teamcode.MethodSlave.rangeRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
-import static org.firstinspires.ftc.teamcode.MethodSlave.wallAlign;
 
 /**
- * Created by Hasan on 12/1/2016.
+ * Created by Fluff on 2/26/2017.
  */
 
 //sets program name and group on phone, and groups are in alphabetic order
-@Autonomous(name="Center Shoot One Beacons Park Blue", group="Beacon")
-public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
+@Autonomous(name="Center Shoot One Blue YOGA", group="Beacon")
+public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
     DcMotor leftMotor;
@@ -50,7 +47,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        //initializes co    mponents to names on phone
+        //initializes components to names on phone
         leftMotor = hardwareMap.dcMotor.get("left");
         rightMotor = hardwareMap.dcMotor.get("right");
         loader = hardwareMap.dcMotor.get("loader");
@@ -77,13 +74,15 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
 
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(2, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(3, 1.0, leftMotor, rightMotor,opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(30, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardLeft(9.7, 0.5, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-46, -1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardRight(8.0, 0.5, leftMotor, rightMotor, opModeIsActive());
-        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        encoderForward(15, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardRight(4.5, 0.6, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(72, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardRight(5.5, 0.6, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(26, 0.3, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(10, 1.0, leftMotor, rightMotor, opModeIsActive());
+        lineApproach(0.25, 0.2, 12, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         if (color.blue() > color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -94,7 +93,7 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            encoderForward(8, 0.5, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-55, -1.0, leftMotor, rightMotor, opModeIsActive());
         }else if(color.blue() < color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -102,15 +101,15 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-55, -1.0, leftMotor, rightMotor, opModeIsActive());
         }
 
-        lineApproach(0.25, 0.25, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, -0.2, 12, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
 
         if (color.blue() > color.red()) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5.5, 0.5, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -118,16 +117,18 @@ public class VVShootOneBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
             encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
         }else if(color.blue() < color.red()){
-            buttonPresser.setPosition(0);
+            beaconCheckOut(buttonPresser);
             sleep(700);
-            buttonPresser.setPosition(1);
+            beaconCheckIn(buttonPresser);
             sleep(700);
+            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
 
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        realEncoderForwardLeft(15, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(47, 1.0, leftMotor, rightMotor, opModeIsActive());
+        realEncoderForwardLeft(19, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(17, 1.0, leftMotor, rightMotor, opModeIsActive());
     }
 }
 
