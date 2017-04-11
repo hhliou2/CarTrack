@@ -500,14 +500,19 @@ public class MethodSlave {
                     if (frange.getDistance(DistanceUnit.CM) < range) {
                         backLeftMotor.setPower(speed * 0.3);
                         backRightMotor.setPower(-speed);
-
+                        frontLeftMotor.setPower(speed * 0.3);
+                        frontRightMotor.setPower(-speed);
                     } else if (frange.getDistance(DistanceUnit.CM) > range) {
                         backLeftMotor.setPower(speed);
                         backRightMotor.setPower(-speed * 0.3);
+                        frontLeftMotor.setPower(speed);
+                        frontRightMotor.setPower(-speed * 0.3);
 
                     } else {
                         backLeftMotor.setPower(speed);
                         backRightMotor.setPower(-speed);
+                        frontLeftMotor.setPower(speed);
+                        frontRightMotor.setPower(-speed);
                     }
                 }else if(eopd.getLightDetected() > intensity) {
                     break;
@@ -516,6 +521,8 @@ public class MethodSlave {
 
             backLeftMotor.setPower(0);
             backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         } /* else {
            while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
                backLeftMotor.setPower(speed);
@@ -527,10 +534,12 @@ public class MethodSlave {
 
    }
 */}
-    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,
+    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,DcMotor frontLeftMotor, DcMotor frontRightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(isWhiteLine) {
             while (opModeIsActive) {
@@ -539,14 +548,20 @@ public class MethodSlave {
                     if (frange.getDistance(DistanceUnit.CM) < 11) {
                         backLeftMotor.setPower(-speed / 2.5);
                         backRightMotor.setPower(speed);
+                        frontLeftMotor.setPower(-speed / 2.5);
+                        frontRightMotor.setPower(speed);
 
                     } else if (frange.getDistance(DistanceUnit.CM) > 11) {
                         backLeftMotor.setPower(-speed);
                         backRightMotor.setPower(speed / 2.5);
+                        frontLeftMotor.setPower(-speed);
+                        frontRightMotor.setPower(speed / 2.5);
 
                     } else {
                         backLeftMotor.setPower(-speed);
                         backRightMotor.setPower(speed);
+                        frontLeftMotor.setPower(-speed);
+                        frontRightMotor.setPower(speed);
                     }
                 }else if(eopd.getLightDetected() > intensity) {
                     break;
@@ -555,41 +570,58 @@ public class MethodSlave {
 
             backLeftMotor.setPower(0);
             backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         }
     }
     public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,
+                                   DcMotor frontLeftMotor, DcMotor frontRightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(isWhiteLine) {
             while (!touch.isPressed() && opModeIsActive) {
                 if(eopd.getLightDetected() < intensity) {
                     backLeftMotor.setPower(speed);
                     backRightMotor.setPower(0);
+                    frontLeftMotor.setPower(speed);
+                    frontRightMotor.setPower(0);
                 }
                 else {
                     backRightMotor.setPower(-speed);
                     backLeftMotor.setPower(0);
+                    frontRightMotor.setPower(-speed);
+                    frontLeftMotor.setPower(0);
                 }
             }
 
             backLeftMotor.setPower(0);
             backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         } else {
             while (!touch.isPressed() && opModeIsActive) {
                 if(eopd.getLightDetected() > intensity) {
                     backLeftMotor.setPower(speed);
                     backRightMotor.setPower(0);
+                    frontLeftMotor.setPower(speed);
+                    frontRightMotor.setPower(0);
                 }
                 else {
                     backRightMotor.setPower(-speed);
                     backLeftMotor.setPower(0);
+                    frontRightMotor.setPower(-speed);
+                    frontLeftMotor.setPower(0);
                 }
             }
 
             backLeftMotor.setPower(0);
             backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         }
     }
 
