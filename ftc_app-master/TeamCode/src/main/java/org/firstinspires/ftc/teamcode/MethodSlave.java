@@ -18,7 +18,7 @@ import static java.lang.Thread.sleep;
 public class MethodSlave {
 
     //sets several constants
-    private final static int ENCODER_CPR = 1120;
+    private final static int ENCODER_CPR = 560;
     private final static double GEAR_RATIO = 1;
     private final static int WHEEL_DIAMETER = 3;
 
@@ -34,99 +34,137 @@ public class MethodSlave {
     //sets value to be sent to encoder
     private final static double COUNTS_NEVEREST60 = ENCODER_CPR_NEVEREST60 * ROTATIONS_NEVEREST60 * GEAR_RATIO_NEVEREST60;
 
-    public static void rangeLeft(double range, double speed, DcMotor leftMotor, DcMotor rightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    public static void rangeLeft(double range, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(opModeIsActive){
             if(frange.getDistance(DistanceUnit.CM) > range){
                 while ((frange.getDistance(DistanceUnit.CM) > range)) {
-                    leftMotor.setPower(speed);
-                    rightMotor.setPower(speed);
+                    backLeftMotor.setPower(speed);
+                    frontLeftMotor.setPower(speed);
+                    backRightMotor.setPower(speed);
+                    frontRightMotor.setPower(speed);
                 }
             } else if (frange.getDistance(DistanceUnit.CM) <= range){
-                leftMotor.setPower(0);
-                rightMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                frontLeftMotor.setPower(0);
+                backRightMotor.setPower(0);
+                frontRightMotor.setPower(0);
             }
         } else if (!opModeIsActive){
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            frontRightMotor.setPower(0);
         }
 
     }
 
-    public static void rangeRight(double range, double speed, DcMotor leftMotor, DcMotor rightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    public static void rangeRight(double range, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(opModeIsActive){
             if(frange.getDistance(DistanceUnit.CM) > range){
                 while ((frange.getDistance(DistanceUnit.CM) > range)) {
-                    leftMotor.setPower(-speed);
-                    rightMotor.setPower(-speed);
+                    backLeftMotor.setPower(-speed);
+                    backRightMotor.setPower(-speed);
+                    frontLeftMotor.setPower(-speed);
+                    frontRightMotor.setPower(-speed);
                 }
             } else if (frange.getDistance(DistanceUnit.CM) <= range){
-                leftMotor.setPower(0);
-                rightMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                backRightMotor.setPower(0);
+                frontLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
             }
         } else if (!opModeIsActive){
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         }
 
     }
 
-    public static void encoderSlow(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+    public static void encoderSlow(double distance, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
 
         //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotor.setTargetPosition((int) counts);
-        rightMotor.setTargetPosition((int) -counts);
+        backLeftMotor.setTargetPosition((int) counts);
+        backRightMotor.setTargetPosition((int) -counts);
+        frontLeftMotor.setTargetPosition((int) counts);
+        frontRightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(-speed * 0.80);
-        rightMotor.setPower(speed);
+        backLeftMotor.setPower(-speed * 0.80);
+        backRightMotor.setPower(speed);
+        frontLeftMotor.setPower(-speed * 0.80);
+        frontRightMotor.setPower(speed);
 
-        while (leftMotor.isBusy() && rightMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(-speed * 0.8);
-            rightMotor.setPower(speed);
+        while (backLeftMotor.isBusy() && backRightMotor.isBusy() && opModeIsActive) {
+            backLeftMotor.setPower(-speed * 0.8);
+            backRightMotor.setPower(speed);
+            frontLeftMotor.setPower(-speed * 0.80);
+            frontRightMotor.setPower(speed);
         }
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
 
-    public static void encoderForward(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+    public static void encoderForward(double distance, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
 
         //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotor.setTargetPosition((int) counts);
-        rightMotor.setTargetPosition((int) -counts);
+        backLeftMotor.setTargetPosition((int) counts);
+        backRightMotor.setTargetPosition((int) -counts);
+        frontLeftMotor.setTargetPosition((int) counts);
+        frontRightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(-speed*0.8);
-        rightMotor.setPower(speed);
+        backLeftMotor.setPower(-speed*0.8);
+        backRightMotor.setPower(speed);
+        frontLeftMotor.setPower(-speed*0.8);
+        frontRightMotor.setPower(speed);
 
-        while (leftMotor.isBusy() && rightMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(-speed*0.8);
-            rightMotor.setPower(speed);
+        while (backLeftMotor.isBusy() && backRightMotor.isBusy() && opModeIsActive) {
+            backLeftMotor.setPower(-speed*0.8);
+            backRightMotor.setPower(speed);
+            frontLeftMotor.setPower(-speed*0.8);
+            frontRightMotor.setPower(speed);
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
 
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //end of cycle
     }
 
-    public static void gyroForward(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro, boolean opModeIsActive) {
+    public static void gyroForward(double distance, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, GyroSensor gyro, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
 
@@ -134,157 +172,212 @@ public class MethodSlave {
         gyro.calibrate();
 
         //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotor.setTargetPosition((int) counts);
-        rightMotor.setTargetPosition((int) -counts);
+        backLeftMotor.setTargetPosition((int) counts);
+        backRightMotor.setTargetPosition((int) -counts);
+        frontLeftMotor.setTargetPosition((int) counts);
+        frontRightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(speed);
-        rightMotor.setPower(-speed);
+        backLeftMotor.setPower(speed);
+        backRightMotor.setPower(-speed);
+        frontLeftMotor.setPower(speed);
+        frontRightMotor.setPower(-speed);
 
-
-        while (leftMotor.isBusy() && opModeIsActive) {
+        while (backLeftMotor.isBusy() && opModeIsActive) {
             if((gyro.getHeading())>1 && (gyro.getHeading())<20 && opModeIsActive){
                 //if the robot is angled right, make the left motor slower
-                leftMotor.setPower(speed * 0.75);
-                rightMotor.setPower(-speed);
+                backLeftMotor.setPower(speed * 0.75);
+                backRightMotor.setPower(-speed);
+                frontLeftMotor.setPower(speed * 0.75);
+                frontRightMotor.setPower(-speed);
             }
             else if (((gyro.getHeading()) <= 359) && ((gyro.getHeading() >= 339)) && opModeIsActive ){
                 //if the robot is angled left, make the right motor slower
-                leftMotor.setPower(speed);
-                rightMotor.setPower(-speed * 0.75);
+                backLeftMotor.setPower(speed);
+                backRightMotor.setPower(-speed * 0.75);
+                frontLeftMotor.setPower(speed);
+                frontRightMotor.setPower(-speed * 0.75);
             }
             else{
                 //just go straight when facing straight
-                leftMotor.setPower(speed);
-                rightMotor.setPower(-speed);
+                backLeftMotor.setPower(speed);
+                backRightMotor.setPower(-speed);
+                frontLeftMotor.setPower(speed);
+                frontRightMotor.setPower(-speed);
             }
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
 
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //end of cycle
     }
 
-    public static void realEncoderForwardLeft(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+    public static void realEncoderForwardLeft(double distance, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
 
         //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotor.setTargetPosition((int) -counts);
-        rightMotor.setTargetPosition((int) -counts);
+        backLeftMotor.setTargetPosition((int) -counts);
+        backRightMotor.setTargetPosition((int) -counts);
+        frontLeftMotor.setTargetPosition((int) -counts);
+        frontRightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(-speed);
-        rightMotor.setPower(-speed);
+        backLeftMotor.setPower(-speed);
+        backRightMotor.setPower(-speed);
+        frontLeftMotor.setPower(-speed);
+        frontRightMotor.setPower(-speed);
 
-        while (leftMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(-speed);
-            rightMotor.setPower(-speed);
+        while (backLeftMotor.isBusy() && opModeIsActive) {
+            backLeftMotor.setPower(-speed);
+            backRightMotor.setPower(-speed);
+            frontLeftMotor.setPower(-speed);
+            frontRightMotor.setPower(-speed);
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
 
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //end of cycle
     }
 
-    public static void realEncoderForwardRight(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor, boolean opModeIsActive) {
+    public static void realEncoderForwardRight(double distance, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, boolean opModeIsActive) {
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
 
         //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotor.setTargetPosition((int) counts);
-        rightMotor.setTargetPosition((int) counts);
+        backLeftMotor.setTargetPosition((int) counts);
+        backRightMotor.setTargetPosition((int) counts);
+        frontLeftMotor.setTargetPosition((int) counts);
+        frontRightMotor.setTargetPosition((int) counts);
 
-        leftMotor.setPower(speed);
-        rightMotor.setPower(speed);
+        backLeftMotor.setPower(speed);
+        backRightMotor.setPower(speed);
+        frontLeftMotor.setPower(speed);
+        frontRightMotor.setPower(speed);
 
-        while (leftMotor.isBusy() && opModeIsActive) {
-            leftMotor.setPower(speed);
-            rightMotor.setPower(speed);
+        while (backLeftMotor.isBusy() && opModeIsActive) {
+            backLeftMotor.setPower(speed);
+            backRightMotor.setPower(speed);
+            frontLeftMotor.setPower(speed);
+            frontRightMotor.setPower(speed);
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
 
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //end of cycle
     }
 
-    public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor leftMotor, DcMotor rightMotor,GyroSensor gyro,
+    public static void gyroTurn(double angle, double speed, boolean isLeft, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, GyroSensor gyro,
                                 boolean opModeIsActive) {
         if (isLeft) {
 
             while ( opModeIsActive && (gyro.getHeading() > (360 - angle) || gyro.getHeading() <= 2)) {
                 if (opModeIsActive) {
-                    leftMotor.setPower(-speed);
-                    rightMotor.setPower(-speed);
+                    backLeftMotor.setPower(-speed);
+                    backRightMotor.setPower(-speed);
+                    frontLeftMotor.setPower(-speed);
+                    frontRightMotor.setPower(-speed);
                 } else {
                     return;
                 }
             }
 
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         } else {
 
             while (opModeIsActive && (gyro.getHeading() < angle || gyro.getHeading() == 0)) {
                 if (opModeIsActive) {
-                    leftMotor.setPower(speed);
-                    rightMotor.setPower(speed);
+                    backLeftMotor.setPower(speed);
+                    backRightMotor.setPower(speed);
+                    frontLeftMotor.setPower(speed);
+                    frontRightMotor.setPower(speed);
                 } else {
                     return;
                 }
             }
 
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
         }
     }
 
-    public static void swingLeft(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
+    public static void swingLeft(double angle, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, GyroSensor gyro,
                                  boolean opModeIsActive) {
 
         while (opModeIsActive && (gyro.getHeading() > (360 - angle) || (gyro.getHeading() <= 2))) {
             if (opModeIsActive) {
-                leftMotor.setPower(0);
-                rightMotor.setPower(-speed);
+                backLeftMotor.setPower(0);
+                backRightMotor.setPower(-speed);
+                frontLeftMotor.setPower(0);
+                frontRightMotor.setPower(-speed);
             } else {
                 return;
             }
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
     }
 
-    public static void swingRight(double angle, double speed, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro,
+    public static void swingRight(double angle, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, GyroSensor gyro,
                                   boolean opModeIsActive) {
 
         while (opModeIsActive && (gyro.getHeading() < angle || gyro.getHeading() == 0)) {
             if (opModeIsActive) {
-                leftMotor.setPower(speed);
-                rightMotor.setPower(0);
+                backLeftMotor.setPower(speed);
+                backRightMotor.setPower(0);
+                frontLeftMotor.setPower(speed);
+                frontRightMotor.setPower(0);
             } else {
                 return;
             }
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
     }
 
     public static void shootOne(Servo floodgate, DcMotor launcher, boolean opModeIsActive) {
@@ -346,143 +439,157 @@ public class MethodSlave {
         //end of cycle
     }
 
-    public static void wallAlign(double distance, double speed, DcMotor leftMotor, DcMotor rightMotor,
+    public static void wallAlign(double distance, double speed, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor,
                                  ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
         double rotations = distance / CIRCUMFERENCE;
         double counts = ENCODER_CPR * rotations * GEAR_RATIO;
 
         //start encoder run cycle, turns to next beacon
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotor.setTargetPosition((int) counts);
-        rightMotor.setTargetPosition((int) -counts);
+        backLeftMotor.setTargetPosition((int) counts);
+        backRightMotor.setTargetPosition((int) -counts);
+        frontLeftMotor.setTargetPosition((int) counts);
+        frontRightMotor.setTargetPosition((int) -counts);
 
-        leftMotor.setPower(speed*0.8);
-        rightMotor.setPower(-speed);
+        backLeftMotor.setPower(speed*0.8);
+        backRightMotor.setPower(-speed);
+        frontLeftMotor.setPower(speed*0.8);
+        frontRightMotor.setPower(-speed);
 
         while (opModeIsActive) {
             if (frange.getDistance(DistanceUnit.CM) > 13) {
-                leftMotor.setPower(-speed);
-                rightMotor.setPower(speed / 2.5);
+                backLeftMotor.setPower(-speed);
+                backRightMotor.setPower(speed / 2.5);
+                frontLeftMotor.setPower(-speed);
+                frontRightMotor.setPower(speed / 2.5);
             } else if (frange.getDistance(DistanceUnit.CM) < 9) {
-                leftMotor.setPower(-speed / 2.5);
-                rightMotor.setPower(speed);
+                frontLeftMotor.setPower(-speed / 2.5);
+                frontRightMotor.setPower(speed);
+                frontLeftMotor.setPower(-speed / 2.5);
+                frontRightMotor.setPower(speed);
             }
         }
 
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
 
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
 
-    public static void lineApproach(double intensity, double speed, double range, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+    public static void lineApproach(double intensity, double speed, double range, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive) {
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(isWhiteLine) {
             while (opModeIsActive) {
                 if (eopd.getLightDetected() < intensity) {
                     frange.getDistance(DistanceUnit.CM);
                     if (frange.getDistance(DistanceUnit.CM) < range) {
-                        leftMotor.setPower(speed * 0.3);
-                        rightMotor.setPower(-speed);
+                        backLeftMotor.setPower(speed * 0.3);
+                        backRightMotor.setPower(-speed);
 
                     } else if (frange.getDistance(DistanceUnit.CM) > range) {
-                        leftMotor.setPower(speed);
-                        rightMotor.setPower(-speed * 0.3);
+                        backLeftMotor.setPower(speed);
+                        backRightMotor.setPower(-speed * 0.3);
 
                     } else {
-                        leftMotor.setPower(speed);
-                        rightMotor.setPower(-speed);
+                        backLeftMotor.setPower(speed);
+                        backRightMotor.setPower(-speed);
                     }
                 }else if(eopd.getLightDetected() > intensity) {
                     break;
                 }
             }
 
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
         } /* else {
            while (opModeIsActive && (eopd.getLightDetected() > intensity)) {
-               leftMotor.setPower(speed);
-               rightMotor.setPower(-speed);
+               backLeftMotor.setPower(speed);
+               backRightMotor.setPower(-speed);
            }
-           leftMotor.setPower(0);
-           rightMotor.setPower(0);
+           backLeftMotor.setPower(0);
+           backRightMotor.setPower(0);
        }
 
    }
 */}
-    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(isWhiteLine) {
             while (opModeIsActive) {
                 if (eopd.getLightDetected() < intensity) {
                     frange.getDistance(DistanceUnit.CM);
                     if (frange.getDistance(DistanceUnit.CM) < 11) {
-                        leftMotor.setPower(-speed / 2.5);
-                        rightMotor.setPower(speed);
+                        backLeftMotor.setPower(-speed / 2.5);
+                        backRightMotor.setPower(speed);
 
                     } else if (frange.getDistance(DistanceUnit.CM) > 11) {
-                        leftMotor.setPower(-speed);
-                        rightMotor.setPower(speed / 2.5);
+                        backLeftMotor.setPower(-speed);
+                        backRightMotor.setPower(speed / 2.5);
 
                     } else {
-                        leftMotor.setPower(-speed);
-                        rightMotor.setPower(speed);
+                        backLeftMotor.setPower(-speed);
+                        backRightMotor.setPower(speed);
                     }
                 }else if(eopd.getLightDetected() > intensity) {
                     break;
                 }
             }
 
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
         }
     }
-    public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor leftMotor, DcMotor rightMotor,
+    public static void lineFollow (double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,
                                    TouchSensor touch, OpticalDistanceSensor eopd, boolean opModeIsActive) {
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if(isWhiteLine) {
             while (!touch.isPressed() && opModeIsActive) {
                 if(eopd.getLightDetected() < intensity) {
-                    leftMotor.setPower(speed);
-                    rightMotor.setPower(0);
+                    backLeftMotor.setPower(speed);
+                    backRightMotor.setPower(0);
                 }
                 else {
-                    rightMotor.setPower(-speed);
-                    leftMotor.setPower(0);
+                    backRightMotor.setPower(-speed);
+                    backLeftMotor.setPower(0);
                 }
             }
 
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
         } else {
             while (!touch.isPressed() && opModeIsActive) {
                 if(eopd.getLightDetected() > intensity) {
-                    leftMotor.setPower(speed);
-                    rightMotor.setPower(0);
+                    backLeftMotor.setPower(speed);
+                    backRightMotor.setPower(0);
                 }
                 else {
-                    rightMotor.setPower(-speed);
-                    leftMotor.setPower(0);
+                    backRightMotor.setPower(-speed);
+                    backLeftMotor.setPower(0);
                 }
             }
 
-            leftMotor.setPower(0);
-            rightMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
         }
     }
 
