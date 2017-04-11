@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by Hasan on 4/11/2017.
  */
-
+@TeleOp(name = "servo test", group = "Test")
 public class ServoTester extends OpMode{
     Servo servo360;
     Servo highSpeed;
