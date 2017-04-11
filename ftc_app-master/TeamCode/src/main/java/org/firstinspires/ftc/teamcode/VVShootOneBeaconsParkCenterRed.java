@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import static org.firstinspires.ftc.teamcode.MethodSlave.BackApproach;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckIn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.beaconCheckOut;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
@@ -29,8 +28,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -50,8 +51,10 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
@@ -74,64 +77,78 @@ public class VVShootOneBeaconsParkCenterRed extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(2, 1.0, leftMotor, rightMotor,opModeIsActive());
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        encoderForward(2, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(28, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardRight(15, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-65.7, -1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardRight(5, 1.0, leftMotor, rightMotor, opModeIsActive());
-        encoderForward(-31, -1.0, leftMotor, rightMotor, opModeIsActive());
-        leftMotor.setPower(0.2);
-        rightMotor.setPower(-0.2);
+        encoderForward(28, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        realEncoderForwardRight(15, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(-65.7, -1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        realEncoderForwardRight(5, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(-31, -1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        backLeftMotor.setPower(0.2);
+        backRightMotor.setPower(-0.2);
+        frontLeftMotor.setPower(0.2);
+        frontRightMotor.setPower(-0.2);
         sleep(50);
-        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, eopd, rangeFront, opModeIsActive());
 
         if (color.blue() < color.red()) {
-            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
+            backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            encoderForward(-5, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            encoderForward(8, 0.5, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(8, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         }else if(color.blue() > color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(5, 1.0, leftMotor, rightMotor, opModeIsActive());
+            backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            encoderForward(5, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         }
 
-        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, eopd, rangeFront, opModeIsActive());
 
         if (color.blue() < color.red()) {
-            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            encoderForward(-5, 0.5, leftMotor, rightMotor, opModeIsActive());
+            backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            encoderForward(-5, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
             sleep(500);
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            encoderForward(8, 0.5, leftMotor, rightMotor, opModeIsActive());
+            encoderForward(8, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         }else if(color.blue() > color.red()){
             beaconCheckOut(buttonPresser);
             sleep(700);
             beaconCheckIn(buttonPresser);
             sleep(700);
-            leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        realEncoderForwardLeft(2, 1.0, leftMotor, rightMotor,opModeIsActive());
-        encoderForward(35, 1.0, leftMotor, rightMotor, opModeIsActive());
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        realEncoderForwardLeft(2, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(35, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
     }
 
 

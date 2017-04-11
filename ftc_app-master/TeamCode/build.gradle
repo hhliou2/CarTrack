@@ -12,4 +12,6 @@
 
 // Include common definitions from above.
 apply from: '../build.common.gradle'
-android { sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/java/2'] } } }
+android { sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/java/2'] } }
+    buildToolsVersion '25.0.0'
+}

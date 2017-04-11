@@ -29,8 +29,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight
 public class BeaconTest extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -50,8 +52,10 @@ public class BeaconTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("frontright");
+        frontLeftMotor = hardwareMap.dcMotor.get("backleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
@@ -77,11 +81,11 @@ public class BeaconTest extends LinearOpMode {
 
         telemetry.addData("Front Sensor: ", frange.getDistance(DistanceUnit.CM));
 
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
-        lineApproach(0.25, 0.2, 11, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
+        lineApproach(0.25, 0.2, 11, true, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, eopd, frange, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);
@@ -102,7 +106,7 @@ public class BeaconTest extends LinearOpMode {
             }
         }
 
-        lineApproach(0.25, 0.20, 11, true, leftMotor, rightMotor, eopd, frange, opModeIsActive());
+        lineApproach(0.25, 0.20, 11, true, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, eopd, frange, opModeIsActive());
 
         beaconCheckOut(buttonPresser);
         sleep(700);

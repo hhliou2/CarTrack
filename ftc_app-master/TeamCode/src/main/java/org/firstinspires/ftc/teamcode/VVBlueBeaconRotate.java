@@ -16,24 +16,28 @@ package org.firstinspires.ftc.teamcode;
     public class VVBlueBeaconRotate extends LinearOpMode {
 
         //initialize motors, servos, booleans, and sensors
-        DcMotor leftMotor;
-        DcMotor rightMotor;
+        DcMotor backLeftMotor;
+        DcMotor backRightMotor;
+        DcMotor frontLeftMotor;
+        DcMotor frontRightMotor;
         GyroSensor gyro;
 
 
         @Override
         public void runOpMode() throws InterruptedException {
             //initializes components to names on phone
-            leftMotor = hardwareMap.dcMotor.get("left");
-            rightMotor = hardwareMap.dcMotor.get("right");
+            backLeftMotor = hardwareMap.dcMotor.get("backleft");
+            backRightMotor = hardwareMap.dcMotor.get("backright");
+            frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+            frontRightMotor = hardwareMap.dcMotor.get("frontright");
             gyro = hardwareMap.gyroSensor.get("gyro");
 
             //waits for user to press start
             waitForStart();
 
-            gyroTurn(24.736, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
+            gyroTurn(24.736, 1.0, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
             sleep(2000);
-            gyroTurn(28.0835, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
+            gyroTurn(28.0835, 1.0, false, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
         }
 
 
