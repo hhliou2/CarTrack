@@ -25,8 +25,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 public class VVShootTwoBeaconsParkCornerBlue extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -44,10 +46,10 @@ public class VVShootTwoBeaconsParkCornerBlue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
-        loader = hardwareMap.dcMotor.get("loader");
-        launcher = hardwareMap.dcMotor.get("launcher");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
 
         buttonPresser = hardwareMap.servo.get("button");
         floodgate = hardwareMap.servo.get("floodGate");
@@ -66,18 +68,18 @@ public class VVShootTwoBeaconsParkCornerBlue extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderForward(49, 0.5, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(49, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        gyroTurn(5, 1.0, true, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(30, 1.0, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(10, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(5, 1.0, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        encoderForward(30, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        gyroTurn(10, 1.0, false, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
 
-        gyroTurn(10, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(-18, -1, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(10, 1, true, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(144, 1, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(5, 1, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(12, 1, leftMotor, rightMotor, opModeIsActive());
+        gyroTurn(10, 1.0, false, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        encoderForward(-18, -1, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        gyroTurn(10, 1, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        encoderForward(144, 1, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        gyroTurn(5, 1, false, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        encoderForward(12, 1, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
     }
 
 

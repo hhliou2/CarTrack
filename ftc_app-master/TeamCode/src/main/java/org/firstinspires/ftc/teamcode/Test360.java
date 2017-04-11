@@ -16,22 +16,26 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 public class Test360 extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     GyroSensor gyro;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         gyro = hardwareMap.gyroSensor.get("gyro");
 
         //waits for user to press start
         waitForStart();
 
-        gyroTurn(356, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(356, 1.0, false, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
     }
 
 

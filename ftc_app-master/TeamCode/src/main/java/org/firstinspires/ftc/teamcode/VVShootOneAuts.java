@@ -21,8 +21,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 public class VVShootOneAuts extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -39,8 +41,10 @@ public class VVShootOneAuts extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
@@ -61,11 +65,13 @@ public class VVShootOneAuts extends LinearOpMode {
         waitForStart();
 
         sleep(15000);
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(12, 1.0, leftMotor, rightMotor, opModeIsActive());
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        encoderForward(12, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(42, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(42, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
     }
 
 

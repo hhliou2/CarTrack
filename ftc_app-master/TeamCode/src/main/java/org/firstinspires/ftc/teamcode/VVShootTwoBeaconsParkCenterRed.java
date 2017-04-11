@@ -26,8 +26,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.shootTwo;
 public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -47,8 +49,10 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
@@ -71,12 +75,12 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        encoderForward(8, 1.0, leftMotor, rightMotor,opModeIsActive());
+        encoderForward(8, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        gyroTurn(27.57333, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(-128.16, -1.0, leftMotor, rightMotor, opModeIsActive());
-        gyroTurn(4.926, 1.0, false, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.25, 0.5, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        gyroTurn(27.57333, 1.0, false, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        encoderForward(-128.16, -1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        gyroTurn(4.926, 1.0, false, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        lineApproach(0.25, 0.5, 11, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, eopd, rangeFront, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -84,7 +88,7 @@ public class VVShootTwoBeaconsParkCenterRed extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.15, 0.5, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.15, 0.5, 11, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
