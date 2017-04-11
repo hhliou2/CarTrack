@@ -534,7 +534,7 @@ public class MethodSlave {
 
    }
 */}
-    public static void BackApproach(double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,DcMotor frontLeftMotor, DcMotor frontRightMotor,
+    public static void backApproach(double intensity, double speed, boolean isWhiteLine, DcMotor backLeftMotor, DcMotor backRightMotor,DcMotor frontLeftMotor, DcMotor frontRightMotor,
                                     OpticalDistanceSensor eopd, ModernRoboticsI2cRangeSensor frange, boolean opModeIsActive){
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

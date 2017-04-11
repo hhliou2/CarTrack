@@ -12,7 +12,6 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.gyroTurn;
 import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardLeft;
-import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 
 /**
  * Created by Hasan on 12/1/2016.
@@ -23,8 +22,10 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight
 public class MethodSlaveTest extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -42,8 +43,10 @@ public class MethodSlaveTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
@@ -64,10 +67,10 @@ public class MethodSlaveTest extends LinearOpMode {
         //waits for user to press start
         waitForStart();
 
-        gyroTurn(77, 0.2, true, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(77, 0.2, true, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
         gyro.calibrate();
         sleep(3000);
-        gyroTurn(77, 0.2, false, leftMotor, rightMotor, gyro, opModeIsActive());
+        gyroTurn(77, 0.2, false, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
     }
 
 
