@@ -14,8 +14,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="Driver Controllur", group="TeleOp")
 public class VelocityVortexManualTank extends OpMode {
 
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
     DcMotor noodler;
@@ -39,8 +41,10 @@ public class VelocityVortexManualTank extends OpMode {
     @Override
     public void init() {
 
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
         noodler = hardwareMap.dcMotor.get("noodler");
@@ -61,8 +65,10 @@ public class VelocityVortexManualTank extends OpMode {
             float leftDrive = gamepad1.left_stick_y;
             float rightDrive = -gamepad1.right_stick_y;
 
-            rightMotor.setPower(leftDrive);
-            leftMotor.setPower(rightDrive);
+            backRightMotor.setPower(leftDrive);
+            backLeftMotor.setPower(rightDrive);
+            frontRightMotor.setPower(leftDrive);
+            frontLeftMotor.setPower(rightDrive);
 
             if(gamepad2.a) {
                 noodler.setPower(1.0);
@@ -114,8 +120,10 @@ public class VelocityVortexManualTank extends OpMode {
             float leftDrive = -gamepad1.left_stick_y;
             float rightDrive = gamepad1.right_stick_y;
 
-            rightMotor.setPower(rightDrive);
-            leftMotor.setPower(leftDrive);
+            backRightMotor.setPower(rightDrive);
+            backLeftMotor.setPower(leftDrive);
+            frontRightMotor.setPower(rightDrive);
+            backLeftMotor.setPower(leftDrive);
 
             if(gamepad2.a) {
                 noodler.setPower(1.0);

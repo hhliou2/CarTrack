@@ -32,8 +32,10 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
     private double SHOOTING_DISTANCE = 7;
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
 
@@ -53,8 +55,10 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontleft");
+        frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
@@ -78,15 +82,15 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
 
         waitForStart();
 
-        encoderForward(2, 1.0, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(2, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-        encoderForward(26, 1.0, leftMotor, rightMotor, opModeIsActive());
-        realEncoderForwardLeft(10.524335, 0.3, leftMotor, rightMotor, opModeIsActive());
+        encoderForward(26, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        realEncoderForwardLeft(10.524335, 0.3, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
 
         //we run into the wall to create the constant
-        encoderForward(65, -1.0, leftMotor, rightMotor, opModeIsActive());
-        swingRight(92, 0.25, leftMotor, rightMotor, gyro, opModeIsActive());
-        lineApproach(0.15, 0.15, 13, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        encoderForward(65, -1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        swingRight(92, 0.25, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        lineApproach(0.15, 0.15, 13, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, eopd, rangeFront, opModeIsActive());
         do {
             beaconCheckOut(buttonPresser);
             sleep(700);
@@ -94,7 +98,7 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
             sleep(700);
         } while (color.blue() < color.red());
 
-        lineApproach(0.15, 0.15, 11, true, leftMotor, rightMotor, eopd, rangeFront, opModeIsActive());
+        lineApproach(0.15, 0.15, 11, true, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, eopd, rangeFront, opModeIsActive());
 
         do {
             beaconCheckOut(buttonPresser);
@@ -104,8 +108,8 @@ public class VVShootTwoBeaconsParkCenterBlue extends LinearOpMode {
         } while (color.blue() < color.red());
 
         //turn toward cap ball and bump
-        swingLeft(130, 0.3,leftMotor, rightMotor, gyro, opModeIsActive());
-        encoderForward(80.823374593, 1.0, leftMotor, rightMotor, opModeIsActive());
+        swingLeft(130, 0.3, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
+        encoderForward(80.823374593, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         }
     }
 

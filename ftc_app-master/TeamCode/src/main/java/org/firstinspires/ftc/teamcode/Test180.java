@@ -18,16 +18,18 @@ import static org.firstinspires.ftc.teamcode.MethodSlave.swingRight;
 public class Test180 extends LinearOpMode {
 
     //initialize motors, servos, booleans, and sensors
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
     GyroSensor gyro;
     Servo buttonPresser;
 
     @Override
     public void runOpMode() throws InterruptedException {
         //initializes components to names on phone
-        leftMotor = hardwareMap.dcMotor.get("left");
-        rightMotor = hardwareMap.dcMotor.get("right");
+        backLeftMotor = hardwareMap.dcMotor.get("backleft");
+        backRightMotor = hardwareMap.dcMotor.get("backright");
         gyro = hardwareMap.gyroSensor.get("gyro");
         buttonPresser = hardwareMap.servo.get("button");
 
@@ -38,9 +40,9 @@ public class Test180 extends LinearOpMode {
 
         gyro.calibrate();
         while (gyro.isCalibrating()) {
-            leftMotor.setPower(0);
+            backLeftMotor.setPower(0);
         }
-        swingRight(167, 0.4, leftMotor, rightMotor, gyro, opModeIsActive());
+        swingRight(167, 0.4, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, gyro, opModeIsActive());
     }
 
 
