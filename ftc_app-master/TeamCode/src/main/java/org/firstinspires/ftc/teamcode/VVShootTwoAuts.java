@@ -72,12 +72,9 @@ public class VVShootTwoAuts extends LinearOpMode {
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         encoderForward(12, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootTwo(floodgate, launcher, opModeIsActive());
-<<<<<<< HEAD
-        encoderForward(42, 1.0, leftMotor, rightMotor, opModeIsActive());
-    }
-=======
+
         encoderForward(42, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
->>>>>>> 5b51ef8bfb9d272e401806eadd783f0f7b4e8554
+
 
     }
 
