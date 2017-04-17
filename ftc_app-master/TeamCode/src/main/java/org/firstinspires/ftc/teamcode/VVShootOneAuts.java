@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderSlow;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -69,13 +70,11 @@ public class VVShootOneAuts extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(12, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(37, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-<<<<<<< HEAD
-        encoderForward(42, 1.0, leftMotor, rightMotor, opModeIsActive());
-=======
-        encoderForward(42, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
->>>>>>> 5b51ef8bfb9d272e401806eadd783f0f7b4e8554
+        realEncoderForwardRight(1, 0.5, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(18, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+
     }
 
 
