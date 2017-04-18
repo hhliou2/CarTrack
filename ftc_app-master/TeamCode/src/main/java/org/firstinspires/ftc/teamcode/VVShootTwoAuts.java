@@ -33,7 +33,8 @@ public class VVShootTwoAuts extends LinearOpMode {
     Servo buttonPresser;
     Servo floodgate;
 
-    ColorSensor color;
+    ColorSensor colorright;
+    ColorSensor colorleft;
 
     OpticalDistanceSensor eopd;
 
@@ -53,7 +54,8 @@ public class VVShootTwoAuts extends LinearOpMode {
         buttonPresser = hardwareMap.servo.get("button");
         floodgate = hardwareMap.servo.get("floodGate");
 
-        color = hardwareMap.colorSensor.get("color");
+        colorleft = hardwareMap.colorSensor.get("colorleft");
+        colorright = hardwareMap.colorSensor.get("colorright");
 
         eopd = hardwareMap.opticalDistanceSensor.get("eopd");
 

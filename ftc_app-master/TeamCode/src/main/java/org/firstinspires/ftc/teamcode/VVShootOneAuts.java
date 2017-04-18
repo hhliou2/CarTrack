@@ -29,10 +29,12 @@ public class VVShootOneAuts extends LinearOpMode {
     DcMotor loader;
     DcMotor launcher;
 
-    Servo buttonPresser;
+    Servo rightPresser;
     Servo floodgate;
+    Servo leftPresser;
 
-    ColorSensor color;
+    ColorSensor colorright;
+    ColorSensor colorleft;
 
     OpticalDistanceSensor eopd;
 
@@ -49,10 +51,12 @@ public class VVShootOneAuts extends LinearOpMode {
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
-        buttonPresser = hardwareMap.servo.get("button");
+        rightPresser = hardwareMap.servo.get("rightPresser");
         floodgate = hardwareMap.servo.get("floodGate");
+        leftPresser = hardwareMap.servo.get("leftPresser");
 
-        color = hardwareMap.colorSensor.get("color");
+        colorleft = hardwareMap.colorSensor.get("colorleft");
+        colorright = hardwareMap.colorSensor.get("colorright");
 
         eopd = hardwareMap.opticalDistanceSensor.get("eopd");
 
@@ -60,7 +64,7 @@ public class VVShootOneAuts extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(1);
+        rightPresser.setPosition(1);
 
         //waits for user to press start
         waitForStart();

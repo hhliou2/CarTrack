@@ -20,13 +20,10 @@ public class VelocityVortexManualTank extends OpMode {
     DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
-    DcMotor liftOne;
-    DcMotor liftTwo;
 
     Servo rightPresser;
     Servo leftPresser;
     Servo floodgate;
-    Servo release;
 
     boolean isBackWheelDrive;
 
@@ -48,20 +45,16 @@ public class VelocityVortexManualTank extends OpMode {
         frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
-        liftOne = hardwareMap.dcMotor.get("liftOne");
-        liftTwo = hardwareMap.dcMotor.get("liftTwo");
 
 
         rightPresser = hardwareMap.servo.get("rightpresser");
         leftPresser = hardwareMap.servo.get("leftpresser");
         floodgate = hardwareMap.servo.get("floodGate");
-        release = hardwareMap.servo.get("release");
 
         isBackWheelDrive = false;
         floodgate.setPosition(0.9);
         rightPresser.setPosition(1.0);
         leftPresser.setPosition(0);
-        release.setPosition(1.0);
     }
 
     @Override
@@ -131,21 +124,6 @@ public class VelocityVortexManualTank extends OpMode {
             backLeftMotor.setPower(leftDrive * 0.5);
             frontRightMotor.setPower(rightDrive * 0.5);
             backLeftMotor.setPower(leftDrive * 0.5);
-
-            if(gamepad2.dpad_down){
-                release.setPosition(0);
-            }
-
-            if(gamepad2.y) {
-                liftOne.setPower(-1.0);
-                liftTwo.setPower(-1.0);
-            } else if (gamepad2.b) {
-                liftOne.setPower(1.0);
-                liftTwo.setPower(1.0);
-            } else {
-                liftOne.setPower(0);
-                liftTwo.setPower(0);
-            }
 
             if(gamepad2.a) {
                 loader.setPower(1.0);
