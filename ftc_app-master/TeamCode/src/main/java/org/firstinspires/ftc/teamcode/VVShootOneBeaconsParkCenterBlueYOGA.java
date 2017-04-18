@@ -34,7 +34,8 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
     DcMotor loader;
     DcMotor launcher;
 
-    Servo buttonPresser;
+    Servo rightPresser;
+    Servo leftPresser;
     Servo floodgate;
 
     ColorSensor color;
@@ -57,7 +58,8 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
-        buttonPresser = hardwareMap.servo.get("button");
+        rightPresser = hardwareMap.servo.get("rightpresser");
+        leftPresser = hardwareMap.servo.get("leftpresser");
         floodgate = hardwareMap.servo.get("floodGate");
 
         color = hardwareMap.colorSensor.get("color");
@@ -72,7 +74,7 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
 
         //close the floodgate
         floodgate.setPosition(0.8);
-        buttonPresser.setPosition(1);
+        rightPresser.setPosition(1);
         //waits for user to press start
         waitForStart();
 
@@ -97,15 +99,15 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
             frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             encoderForward(-5, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
             sleep(500);
-            beaconCheckOut(buttonPresser);
+            beaconCheckOut(rightPresser);
             sleep(700);
-            beaconCheckIn(buttonPresser);
+            beaconCheckIn(rightPresser);
             sleep(700);
             encoderForward(-55, -1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         }else if(color.blue() < color.red()){
-            beaconCheckOut(buttonPresser);
+            beaconCheckOut(rightPresser);
             sleep(700);
-            beaconCheckIn(buttonPresser);
+            beaconCheckIn(rightPresser);
             sleep(700);
             backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -123,15 +125,15 @@ public class VVShootOneBeaconsParkCenterBlueYOGA extends LinearOpMode {
             frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             encoderForward(-5, 0.5, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
             sleep(500);
-            beaconCheckOut(buttonPresser);
+            beaconCheckOut(rightPresser);
             sleep(700);
-            beaconCheckIn(buttonPresser);
+            beaconCheckIn(rightPresser);
             sleep(700);
             encoderForward(5, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         }else if(color.blue() < color.red()){
-            beaconCheckOut(buttonPresser);
+            beaconCheckOut(rightPresser);
             sleep(700);
-            beaconCheckIn(buttonPresser);
+            beaconCheckIn(rightPresser);
             sleep(700);
             backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

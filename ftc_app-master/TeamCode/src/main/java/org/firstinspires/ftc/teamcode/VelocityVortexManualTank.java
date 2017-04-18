@@ -51,7 +51,7 @@ public class VelocityVortexManualTank extends OpMode {
         leftPresser = hardwareMap.servo.get("leftpresser");
         floodgate = hardwareMap.servo.get("floodGate");
 
-        isBackWheelDrive = false;
+        isBackWheelDrive = true;
         floodgate.setPosition(0.9);
         rightPresser.setPosition(1.0);
         leftPresser.setPosition(0);
@@ -64,10 +64,10 @@ public class VelocityVortexManualTank extends OpMode {
             float leftDrive = gamepad1.left_stick_y;
             float rightDrive = -gamepad1.right_stick_y;
 
-            backRightMotor.setPower(leftDrive);
-            backLeftMotor.setPower(rightDrive);
-            frontRightMotor.setPower(leftDrive);
-            frontLeftMotor.setPower(rightDrive);
+            backRightMotor.setPower(rightDrive);
+            backLeftMotor.setPower(leftDrive);
+            frontRightMotor.setPower(rightDrive);
+            frontLeftMotor.setPower(leftDrive);
 
             if(gamepad2.a) {
                 loader.setPower(1.0);
@@ -91,14 +91,14 @@ public class VelocityVortexManualTank extends OpMode {
             }
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
-                rightPresser.setPosition(0);
+                rightPresser.setPosition(0.75);
             } else {
-                rightPresser.setPosition(1.0);
+                rightPresser.setPosition(0);
             }
             if (gamepad2.left_bumper || gamepad1.left_bumper) {
-                leftPresser.setPosition(1.0);
+                leftPresser.setPosition(0.25);
             } else {
-                leftPresser.setPosition(0);
+                leftPresser.setPosition(1.0);
             }
             if (gamepad2.dpad_up) {
 
