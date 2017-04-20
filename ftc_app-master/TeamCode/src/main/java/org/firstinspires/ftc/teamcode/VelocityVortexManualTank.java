@@ -53,8 +53,8 @@ public class VelocityVortexManualTank extends OpMode {
 
         isBackWheelDrive = true;
         floodgate.setPosition(0.9);
-        rightPresser.setPosition(1.0);
-        leftPresser.setPosition(0);
+        rightPresser.setPosition(0);
+        leftPresser.setPosition(1.0);
     }
 
     @Override

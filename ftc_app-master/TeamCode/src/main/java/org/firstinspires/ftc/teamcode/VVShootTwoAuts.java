@@ -30,15 +30,10 @@ public class VVShootTwoAuts extends LinearOpMode {
     DcMotor loader;
     DcMotor launcher;
 
-    Servo buttonPresser;
     Servo floodgate;
+    Servo rightPresser;
+    Servo leftPresser;
 
-    ColorSensor colorright;
-    ColorSensor colorleft;
-
-    OpticalDistanceSensor eopd;
-
-    TouchSensor touch;
 
 
     @Override
@@ -51,19 +46,15 @@ public class VVShootTwoAuts extends LinearOpMode {
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
-        buttonPresser = hardwareMap.servo.get("button");
+
+        rightPresser = hardwareMap.servo.get("rightpresser");
+        leftPresser = hardwareMap.servo.get("leftpresser");
         floodgate = hardwareMap.servo.get("floodGate");
-
-        colorleft = hardwareMap.colorSensor.get("colorleft");
-        colorright = hardwareMap.colorSensor.get("colorright");
-
-        eopd = hardwareMap.opticalDistanceSensor.get("eopd");
-
-        touch = hardwareMap.touchSensor.get("touch");
 
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(1);
+        rightPresser.setPosition(0);
+        leftPresser.setPosition(1.0);
 
         //waits for user to press start
         waitForStart();

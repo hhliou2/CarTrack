@@ -140,10 +140,10 @@ public class MethodSlave {
         frontLeftMotor.setTargetPosition((int) counts);
         frontRightMotor.setTargetPosition((int) -counts);
 
-        backLeftMotor.setPower(-speed);
-        backRightMotor.setPower(speed);
-        frontLeftMotor.setPower(-speed);
-        frontRightMotor.setPower(speed);
+        backLeftMotor.setPower(speed);
+        backRightMotor.setPower(-speed);
+        frontLeftMotor.setPower(speed);
+        frontRightMotor.setPower(-speed);
 
         while (backLeftMotor.isBusy() && backRightMotor.isBusy() && opModeIsActive) {
             backLeftMotor.setPower(-speed);
