@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/carTracker.iml" filepath="$PROJECT_DIR$/carTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CarTrack.iml" filepath="$PROJECT_DIR$/CarTrack.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+>>>>>>> d0e32f25f459de2e0f21fde6919d72368deac69b
     </modules>
   </component>
 </project>
