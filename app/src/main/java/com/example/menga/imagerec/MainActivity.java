@@ -13,6 +13,7 @@ import java.io.File;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -87,6 +88,7 @@ public class MainActivity extends Activity {
         FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
                 .getOnDeviceTextRecognizer();
 
+        final TextView resultTextView = (TextView)findViewById(R.id.resultTextView);
         textRecognizer.processImage(image)
                 .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                     @Override
@@ -94,6 +96,7 @@ public class MainActivity extends Activity {
                         // Task completed successfully
                         String resultText = result.getText();
                         System.out.println(resultText);
+                        resultTextView.setText(resultText);
                     }
                 })
                 .addOnFailureListener(
@@ -102,6 +105,7 @@ public class MainActivity extends Activity {
                             public void onFailure(@NonNull Exception e) {
                                 // Task failed with an exception
                                 System.out.println("why god");
+                                resultTextView.setText("No text found");
                             }
                         });
     }
