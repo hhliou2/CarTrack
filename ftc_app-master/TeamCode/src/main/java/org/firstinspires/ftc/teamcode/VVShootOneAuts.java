@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderForward;
 import static org.firstinspires.ftc.teamcode.MethodSlave.encoderSlow;
+import static org.firstinspires.ftc.teamcode.MethodSlave.realEncoderForwardRight;
 import static org.firstinspires.ftc.teamcode.MethodSlave.shootOne;
 
 /**
@@ -28,14 +29,9 @@ public class VVShootOneAuts extends LinearOpMode {
     DcMotor loader;
     DcMotor launcher;
 
-    Servo buttonPresser;
     Servo floodgate;
-
-    ColorSensor color;
-
-    OpticalDistanceSensor eopd;
-
-    TouchSensor touch;
+    Servo rightPresser;
+    Servo leftPresser;
 
 
     @Override
@@ -48,18 +44,17 @@ public class VVShootOneAuts extends LinearOpMode {
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
 
-        buttonPresser = hardwareMap.servo.get("button");
+
+        rightPresser = hardwareMap.servo.get("rightpresser");
+        leftPresser = hardwareMap.servo.get("leftpresser");
         floodgate = hardwareMap.servo.get("floodGate");
 
-        color = hardwareMap.colorSensor.get("color");
 
-        eopd = hardwareMap.opticalDistanceSensor.get("eopd");
-
-        touch = hardwareMap.touchSensor.get("touch");
 
         //close the floodgate
         floodgate.setPosition(1);
-        buttonPresser.setPosition(1);
+        rightPresser.setPosition(0);
+        leftPresser.setPosition(1.0);
 
         //waits for user to press start
         waitForStart();
@@ -69,9 +64,11 @@ public class VVShootOneAuts extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        encoderForward(12, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(37, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
         shootOne(floodgate, launcher, opModeIsActive());
-        encoderForward(42, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        realEncoderForwardRight(1, 0.5, backLeftMotor, backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+        encoderForward(18, 1.0, backLeftMotor,  backRightMotor, frontLeftMotor, frontRightMotor, opModeIsActive());
+
     }
 
 

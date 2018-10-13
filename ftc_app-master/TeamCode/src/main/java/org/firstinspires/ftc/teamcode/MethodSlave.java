@@ -28,7 +28,7 @@ public class MethodSlave {
     //sets several constants
     // changed to neverest 40 encoder values but kept as ENCODER_CPR_NEVEREST60 for convenience of coding
     private final static int ENCODER_CPR_NEVEREST60 = 1120;
-    private final static double GEAR_RATIO_NEVEREST60 = 4;
+    private final static double GEAR_RATIO_NEVEREST60 = 2;
     private final static int ROTATIONS_NEVEREST60 = 1;
 
     //sets value to be sent to encoder
@@ -140,15 +140,15 @@ public class MethodSlave {
         frontLeftMotor.setTargetPosition((int) counts);
         frontRightMotor.setTargetPosition((int) -counts);
 
-        backLeftMotor.setPower(-speed*0.8);
-        backRightMotor.setPower(speed);
-        frontLeftMotor.setPower(-speed*0.8);
-        frontRightMotor.setPower(speed);
+        backLeftMotor.setPower(speed);
+        backRightMotor.setPower(-speed);
+        frontLeftMotor.setPower(speed);
+        frontRightMotor.setPower(-speed);
 
         while (backLeftMotor.isBusy() && backRightMotor.isBusy() && opModeIsActive) {
-            backLeftMotor.setPower(-speed*0.8);
+            backLeftMotor.setPower(-speed);
             backRightMotor.setPower(speed);
-            frontLeftMotor.setPower(-speed*0.8);
+            frontLeftMotor.setPower(-speed);
             frontRightMotor.setPower(speed);
         }
 

@@ -20,12 +20,10 @@ public class VelocityVortexManualTank extends OpMode {
     DcMotor frontRightMotor;
     DcMotor loader;
     DcMotor launcher;
-    DcMotor noodler;
 
-    Servo buttonPresser;
+    Servo rightPresser;
+    Servo leftPresser;
     Servo floodgate;
-
-    GyroSensor gyro;
 
     boolean isBackWheelDrive;
 
@@ -47,15 +45,16 @@ public class VelocityVortexManualTank extends OpMode {
         frontRightMotor = hardwareMap.dcMotor.get("frontright");
         loader = hardwareMap.dcMotor.get("loader");
         launcher = hardwareMap.dcMotor.get("launcher");
-        noodler = hardwareMap.dcMotor.get("noodler");
 
-        buttonPresser = hardwareMap.servo.get("button");
+
+        rightPresser = hardwareMap.servo.get("rightpresser");
+        leftPresser = hardwareMap.servo.get("leftpresser");
         floodgate = hardwareMap.servo.get("floodGate");
 
-        gyro = hardwareMap.gyroSensor.get("gyro");
-        isBackWheelDrive = false;
+        isBackWheelDrive = true;
         floodgate.setPosition(0.9);
-        buttonPresser.setPosition(1);
+        rightPresser.setPosition(0);
+        leftPresser.setPosition(1.0);
     }
 
     @Override
@@ -65,21 +64,19 @@ public class VelocityVortexManualTank extends OpMode {
             float leftDrive = gamepad1.left_stick_y;
             float rightDrive = -gamepad1.right_stick_y;
 
-            backRightMotor.setPower(leftDrive);
-            backLeftMotor.setPower(rightDrive);
-            frontRightMotor.setPower(leftDrive);
-            frontLeftMotor.setPower(rightDrive);
+            backRightMotor.setPower(rightDrive);
+            backLeftMotor.setPower(leftDrive);
+            frontRightMotor.setPower(rightDrive);
+            frontLeftMotor.setPower(leftDrive);
 
             if(gamepad2.a) {
-                noodler.setPower(1.0);
+                loader.setPower(1.0);
             }
 
             else if(gamepad2.x) {
-                loader.setPower(-0.5);
-                noodler.setPower(-1.0);
+                loader.setPower(-1.0);
             } else {
                 loader.setPower(0);
-                noodler.setPower(0);
             }
 
             if(gamepad1.dpad_up) {
@@ -94,11 +91,14 @@ public class VelocityVortexManualTank extends OpMode {
             }
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
-                buttonPresser.setPosition(0);
-            } else if (gamepad2.left_bumper || gamepad1.left_bumper){
-                buttonPresser.setPosition(1);
+                rightPresser.setPosition(0.75);
             } else {
-                buttonPresser.setPosition(1);
+                rightPresser.setPosition(0);
+            }
+            if (gamepad2.left_bumper || gamepad1.left_bumper) {
+                leftPresser.setPosition(0.25);
+            } else {
+                leftPresser.setPosition(1.0);
             }
             if (gamepad2.dpad_up) {
 
@@ -120,21 +120,19 @@ public class VelocityVortexManualTank extends OpMode {
             float leftDrive = -gamepad1.left_stick_y;
             float rightDrive = gamepad1.right_stick_y;
 
-            backRightMotor.setPower(rightDrive);
-            backLeftMotor.setPower(leftDrive);
-            frontRightMotor.setPower(rightDrive);
-            backLeftMotor.setPower(leftDrive);
+            backRightMotor.setPower(rightDrive * 0.5);
+            backLeftMotor.setPower(leftDrive * 0.5);
+            frontRightMotor.setPower(rightDrive * 0.5);
+            backLeftMotor.setPower(leftDrive * 0.5);
 
             if(gamepad2.a) {
-                noodler.setPower(1.0);
+                loader.setPower(1.0);
             }
 
             else if(gamepad2.x) {
-                loader.setPower(-0.5);
-                noodler.setPower(-1.0);
+                loader.setPower(-1.0);
             } else {
                 loader.setPower(0);
-                noodler.setPower(0);
             }
 
             if(gamepad1.dpad_up) {
@@ -149,12 +147,14 @@ public class VelocityVortexManualTank extends OpMode {
             }
 
             if (gamepad2.right_bumper || gamepad1.right_bumper) {
-                buttonPresser.setPosition(0);
-            }
-            else if (gamepad2.left_bumper || gamepad1.left_bumper) {
-                buttonPresser.setPosition(0);
+                rightPresser.setPosition(0);
             } else {
-                buttonPresser.setPosition(1);
+                rightPresser.setPosition(1.0);
+            }
+            if (gamepad2.right_bumper || gamepad1.right_bumper) {
+                rightPresser.setPosition(0);
+            } else {
+                rightPresser.setPosition(1.0);
             }
 
             if (gamepad2.dpad_up) {
@@ -174,7 +174,6 @@ public class VelocityVortexManualTank extends OpMode {
 
         }
 
-        telemetry.addData("Is Front Wheel Drive?", isBackWheelDrive);
-        telemetry.addData("Gyro Heading: ", gyro.getHeading());
     }
 }
+// is vc work?
