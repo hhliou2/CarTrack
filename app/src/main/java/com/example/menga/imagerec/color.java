@@ -1,6 +1,10 @@
 package com.example.menga.imagerec;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +28,7 @@ import clarifai2.dto.prediction.Concept;
 import clarifai2.dto.prediction.Prediction;
 
 public class color {
+
     private String img="https://i.imgflip.com/vh6to.jpg";
     final ClarifaiClient client = new ClarifaiBuilder("b6e11b6479da4bb5b33267988ab7aa4b").buildSync();
     Model<Concept> generalModel = client.getDefaultModels().generalModel();
@@ -36,7 +41,9 @@ public class color {
     public static void main(String[] args){
         FirebaseVisionImage image;
         try {
-            image = FirebaseVisionImage.fromMediaImage('how do i do this LOL');
+            Drawable stopDrawable = Resources.getSystem().getDrawable(R.drawable.stop);
+            Bitmap stopImage = ((BitmapDrawable)stopDrawable).getBitmap();
+            image = FirebaseVisionImage.fromBitmap(stopImage);
         } catch (IOException e) {
             e.printStackTrace();
         }
