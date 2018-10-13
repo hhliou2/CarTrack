@@ -16,7 +16,6 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import clarifai2.api.ClarifaiBuilder;
