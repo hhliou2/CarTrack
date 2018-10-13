@@ -13,12 +13,16 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+
 
 public class MainActivity extends Activity {
 
     Button button;
     ImageView imageView;
     static final int CAM_REQUEST = 1;
+    Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
