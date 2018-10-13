@@ -20,13 +20,9 @@ public class color {
     private String img="https://i.imgflip.com/vh6to.jpg";
     public static void main(String[] args){
         FirebaseVisionImage image;
-        try {
-            Drawable stopDrawable = Resources.getSystem().getDrawable(R.drawable.stop);
-            Bitmap stopImage = ((BitmapDrawable)stopDrawable).getBitmap();
-            image = FirebaseVisionImage.fromBitmap(stopImage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Drawable stopDrawable = Resources.getSystem().getDrawable(R.drawable.stop);
+        Bitmap stopImage = ((BitmapDrawable)stopDrawable).getBitmap();
+        image = FirebaseVisionImage.fromBitmap(stopImage);
 
         FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
                 .getOnDeviceTextRecognizer();
