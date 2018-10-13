@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">imagerec</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
