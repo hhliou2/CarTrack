@@ -20,9 +20,9 @@ public class color {
     );
     private List<ClarifaiOutput<Concept>> result = request.executeSync().get();
     public color(String images){
-        image = images
+        image = images;
     }
-    public int getSize(){return result.size());}
+    public int getSize(){return result.size();}
 
     public static void main(String[] args){
         color test = new color("https://www.cambridgema.gov/~/media/Images/sharedphotos/Residential-Street-Permits.jpg?mw=1920");
