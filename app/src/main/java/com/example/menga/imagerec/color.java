@@ -58,7 +58,7 @@ public class color {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 // Task failed with an exception
-                                // ...
+                                System.out.println("why god");
                             }
                         });
 
