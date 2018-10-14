@@ -42,5 +42,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        LatLng ucsd = new LatLng(32.88, -117.23);
+        mMap.addMarker(new MarkerOptions().position(ucsd).title("Marker in UC San Diego"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(ucsd));
+
+        LatLng la = new LatLng(34.05, -118.24);
+        mMap.addMarker(new MarkerOptions().position(la).title("Marker in Los Angeles"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(la));
+
+        LatLng london = new LatLng(51.51, -0.13);
+        mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(london));
+
+        LatLng paris = new LatLng(48.86, 2.35);
+        mMap.addMarker(new MarkerOptions().position(paris).title("Marker in Paris"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(paris));
+
+        LatLng beijing = new LatLng(39.90, 116.1);
+        mMap.addMarker(new MarkerOptions().position(beijing).title("Marker in BeiJing"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(beijing));
+
+        LatLng tokyo = new LatLng(35.69, 139.69);
+        mMap.addMarker(new MarkerOptions().position(tokyo).title("Marker in Tokyo"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tokyo));
+
+        LatLng delhi = new LatLng(28.61, -77.21);
+        mMap.addMarker(new MarkerOptions().position(delhi).title("Marker in New Delhi"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(delhi));
+
+        LatLng jerusalem = new LatLng(31.77, -35.21);
+        mMap.addMarker(new MarkerOptions().position(jerusalem).title("Marker in Jerusalem"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(jerusalem));
     }
 }
