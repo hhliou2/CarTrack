@@ -2,6 +2,7 @@ package com.example.menga.imagerec;
 
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,6 +13,14 @@ import java.io.File;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 
 public class MainActivity extends Activity {
@@ -19,6 +28,8 @@ public class MainActivity extends Activity {
     Button button;
     ImageView imageView;
     static final int CAM_REQUEST = 1;
+    Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +79,37 @@ public class MainActivity extends Activity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(imageBitmap);
+
+            image = FirebaseVisionImage.fromBitmap(imageBitmap);
+            takePicture();
         }
     }
+    public void takePicture() {
+        FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
+                .getOnDeviceTextRecognizer();
+
+        final TextView resultTextView = (TextView)findViewById(R.id.resultTextView);
+        textRecognizer.processImage(image)
+                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                    @Override
+                    public void onSuccess(FirebaseVisionText result) {
+                        // Task completed successfully
+                        String resultText = result.getText();
+                        System.out.println(resultText);
+                        resultTextView.setText(resultText);
+                    }
+                })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Task failed with an exception
+                                System.out.println("why god");
+                                resultTextView.setText("No text found");
+                            }
+                        });
+    }
+
 
     /*
     @Override
