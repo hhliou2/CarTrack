@@ -38,12 +38,16 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
+    public void openMaps(View view) {
+        Intent myIntent = new Intent(MainActivity.this,
+                MapsActivity.class);
+        startActivity(myIntent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        color colorobj = new color();
 
         button = (Button)findViewById(R.id.button);
         imageView = (ImageView)findViewById(R.id.imageView);
