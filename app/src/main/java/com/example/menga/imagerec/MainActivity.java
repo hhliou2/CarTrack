@@ -1,5 +1,6 @@
 package com.example.menga.imagerec;
 
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import java.io.File;
+import java.util.Date;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
@@ -37,6 +40,8 @@ public class MainActivity extends Activity {
     FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
+
+    SavedCarImage sci = new SavedCarImage("/root/sdcard");
 
     public void openMaps(View view) {
         Intent myIntent = new Intent(MainActivity.this,
@@ -96,6 +101,12 @@ public class MainActivity extends Activity {
             imageView.setImageBitmap(imageBitmap);
 
             image = FirebaseVisionImage.fromBitmap(imageBitmap);
+
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
+            sci.createDirectoryAndSaveFile(imageBitmap, imageFileName);
+            System.out.println(sci.getFileDirectory());
+            System.out.println(sci.getFileName());
             takePicture();
         }
     }
