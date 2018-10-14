@@ -36,7 +36,7 @@ public class SavedCarImage {
             e.printStackTrace();
         }
 
-        fileDirectory = file.getParent();
+        fileDirectory = file.getAbsolutePath();
     }
 
     public String getFileDirectory() {
