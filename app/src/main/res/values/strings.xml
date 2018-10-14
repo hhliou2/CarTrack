@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">imagerec</string>
+    <string name="app_name">Amber Alert Tracer</string>
     <string name="title_activity_maps">Map</string>
+    <string name="google_maps_API_key"> AIzaSyCbJB4_HnaIGmI17z3yPoBYPArluSQR9UM </string>
 </resources>

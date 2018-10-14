@@ -14,7 +14,12 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import android.util.Log;
+import android.app.*;
+
+import com.google.android.gms.common.*;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -30,13 +35,19 @@ public class MainActivity extends Activity {
     static final int CAM_REQUEST = 1;
     Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
     FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+    private static final String TAG = "MainActivity";
+    private static final int ERROR_DIALOG_REQUEST = 9001;
+
+    public void openMaps(View view) {
+        Intent myIntent = new Intent(MainActivity.this,
+                MapsActivity.class);
+        startActivity(myIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        color colorobj = new color();
 
         button = (Button)findViewById(R.id.button);
         imageView = (ImageView)findViewById(R.id.imageView);
@@ -58,6 +69,10 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        if(isServicesOK()){
+            init();
+        }
     }
 
     private File getFile(){
@@ -88,7 +103,7 @@ public class MainActivity extends Activity {
         FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
                 .getOnDeviceTextRecognizer();
 
-        final TextView resultTextView = (TextView)findViewById(R.id.resultTextView);
+        final TextView resultTextView = (TextView) findViewById(R.id.resultTextView);
         textRecognizer.processImage(image)
                 .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                     @Override
@@ -110,6 +125,31 @@ public class MainActivity extends Activity {
                         });
     }
 
+    public void init() {
+    }
+
+    public boolean isServicesOK()
+    {
+        Log.d(TAG, "isServicesOK: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+
+        if(available == ConnectionResult.SUCCESS){
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        }
+
+        else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
+            Log.d(TAG, "isServiceOK: an error occured but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }
+        else{
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
+
+    }
 
     /*
     @Override
