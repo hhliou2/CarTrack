@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
-    SavedCarImage sci = new SavedCarImage("/root/sdcard");
+    SavedCarImage sci = new SavedCarImage("/Phone/DCIM/Camera");
 
     public void openMaps(View view) {
         Intent myIntent = new Intent(MainActivity.this,

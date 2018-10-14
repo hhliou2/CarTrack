@@ -8,16 +8,13 @@ import java.io.FileOutputStream;
 
 public class SavedCarImage {
 
-    private String fileDirectory;
-    private String fileName;
+    private String fileDirectory = "No directory!";
 
     public SavedCarImage(String fd) {
         fileDirectory = fd;
     }
 
-    public void createDirectoryAndSaveFile(Bitmap imageToSave, String fn) {
-
-        fileName = fn;
+    public void createDirectoryAndSaveFile(Bitmap imageToSave, String fileName) {
 
         File direct = new File(Environment.getExternalStorageDirectory() + "/DirName");
 
@@ -43,9 +40,4 @@ public class SavedCarImage {
     public String getFileDirectory() {
         return fileDirectory;
     }
-
-    public String getFileName() {
-        return fileName;
-    }
-
 }
