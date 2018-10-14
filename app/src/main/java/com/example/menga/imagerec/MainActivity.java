@@ -111,7 +111,8 @@ public class MainActivity extends Activity {
                         // Task completed successfully
                         String resultText = result.getText();
                         System.out.println(resultText);
-                        resultTextView.setText(resultText);
+                        if (!resultText.isEmpty())resultTextView.setText(resultText);
+                        else resultTextView.setText("No text found");
                     }
                 })
                 .addOnFailureListener(
