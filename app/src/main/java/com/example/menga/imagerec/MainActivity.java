@@ -106,7 +106,6 @@ public class MainActivity extends Activity {
             String imageFileName = "JPEG_" + timeStamp + "_";
             sci.createDirectoryAndSaveFile(imageBitmap, imageFileName);
             System.out.println(sci.getFileDirectory());
-            System.out.println(sci.getFileName());
             takePicture();
         }
     }
