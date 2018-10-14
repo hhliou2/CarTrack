@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Intent;
@@ -71,7 +72,6 @@ public class MainActivity extends Activity {
                 if (takePictureIntent.resolveActivity(getPackageManager())!=null){
                     startActivityForResult(takePictureIntent,CAM_REQUEST);
                 }
-
             }
         });
 
@@ -133,6 +133,11 @@ public class MainActivity extends Activity {
                                 resultTextView.setText("No text found");
                             }
                         });
+        colorSense sense = new colorSense();
+        /*ArrayList<entry> dataList = sense.getString(sci.getFileDirectory());
+        for(int i =0;i<dataList.size();i++){
+            System.out.println(dataList.get(i).getColor()+" "+dataList.get(i).getValue());
+        }*/
     }
 
     public void init() {
